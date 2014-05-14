@@ -43,14 +43,14 @@ public class StreamTest {
 
     }
 
-    public static List<Person> readAndConvertToPersonList(String pathName) throws FileNotFoundException {
+    private static List<Person> readAndConvertToPersonList(String pathName) throws FileNotFoundException {
         InputStream is = new FileInputStream(new File(pathName));
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         List<Person> persons = br.lines().map(mapToPerson).collect(Collectors.toList());
         return persons;
     }
 
-    public static Function<String, Person> mapToPerson = (line) -> {
+   private static Function<String, Person> mapToPerson = (line) -> {
         String[] p = line.split(",");
         BigDecimal salary = new BigDecimal(p[2]);
         return new Person(p[0], p[1], salary);
