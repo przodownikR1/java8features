@@ -10,6 +10,12 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
+
+/**
+ * @author przodownik
+ * Module name :    java8features
+ * Creating time :  14 maj 2014
+ */
 @Slf4j
 public class PredicatesTest {
     List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);

@@ -11,10 +11,9 @@ import org.junit.Test;
 import com.google.common.collect.Lists;
 
 /**
- * @author Sławomir Borowiec 
- * Module name : java8features
- * Creating time :  24 mar 2014 13:36:50
- 
+ * @author przodownik
+ * Module name :    java8features
+ * Creating time :  14 maj 2014
  */
 @Slf4j
 public class LambdaTest {
