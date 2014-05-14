@@ -57,8 +57,7 @@ public class StreamTest {
 
     private static Function<String, Person> mapToPerson = (line) -> {
         String[] p = line.split(",");
-        BigDecimal salary = new BigDecimal(p[2]);
-        return new Person(p[0], p[1], salary);
+        return new Person(p[0], p[1], new BigDecimal(p[2]));
     };
 
     @Test
