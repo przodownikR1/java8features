@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
@@ -40,16 +41,17 @@ public class StreamTest {
     }
 
     @Test
-    public void shouldBufferedReaderAsStream() throws FileNotFoundException {
+    public void shouldBufferedReaderAsStream() throws IOException {
         Assertions.assertThat(readAndConvertToPersonList("./src/test/resources/persons.csv")).hasSize(6)
                 .contains(new Person("slawek", "przodownik", new BigDecimal(110)));
 
     }
 
-    private static List<Person> readAndConvertToPersonList(String pathName) throws FileNotFoundException {
-        InputStream is = new FileInputStream(new File(pathName));
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        List<Person> persons = br.lines().map(mapToPerson).collect(Collectors.toList());
+    private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
+        List<Person> persons = null;
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(pathName))))){
+          persons = br.lines().map(mapToPerson).collect(Collectors.toList());
+        }
         return persons;
     }
 
@@ -66,10 +68,10 @@ public class StreamTest {
         
         Arrays.parallelSetAll(ints, i -> random.nextInt(1000));
         //when
-        Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort:  {}", i));
+        //Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort:  {}", i));
         int sumBefore = Arrays.stream(ints).limit(20).sum();
         Arrays.parallelSort(ints);
-        Arrays.stream(ints).limit(10).forEach(i -> log.info(" after sort : {}", i));
+        //Arrays.stream(ints).limit(10).forEach(i -> log.info(" after sort : {}", i));
         int sumAfter = Arrays.stream(ints).limit(20).sum();
         
         //then
