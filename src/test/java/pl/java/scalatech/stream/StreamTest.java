@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -27,7 +29,8 @@ import com.google.common.collect.Lists;
  */
 @Slf4j
 public class StreamTest {
-    List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
+    private List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
+    private Random random = new Random();
 
     @Test
     public void sumStream() {
@@ -50,10 +53,28 @@ public class StreamTest {
         return persons;
     }
 
-   private static Function<String, Person> mapToPerson = (line) -> {
+    private static Function<String, Person> mapToPerson = (line) -> {
         String[] p = line.split(",");
         BigDecimal salary = new BigDecimal(p[2]);
         return new Person(p[0], p[1], salary);
     };
+
+    @Test
+    public void shouldSortTable() {
+        //given
+        int[] ints = new int[1000];
+        
+        Arrays.parallelSetAll(ints, i -> random.nextInt(1000));
+        //when
+        Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort:  {}", i));
+        int sumBefore = Arrays.stream(ints).limit(20).sum();
+        Arrays.parallelSort(ints);
+        Arrays.stream(ints).limit(10).forEach(i -> log.info(" after sort : {}", i));
+        int sumAfter = Arrays.stream(ints).limit(20).sum();
+        
+        //then
+        Assertions.assertThat(sumAfter).isLessThan(sumBefore);
+        
+    }
 
 }
