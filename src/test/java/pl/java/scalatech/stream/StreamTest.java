@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import pl.java.scalatech.pojo.Person;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 /**
@@ -45,12 +46,23 @@ public class StreamTest {
 
     }
 
+    @Test
+    public void shouldFilterWork() {
+        List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
+        Assertions.assertThat(filter(languages, s-> (s.length()>3))).containsExactly("java","perl","fortran");
+    }
+
     private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
         List<Person> persons = null;
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(pathName))))){
-          persons = br.lines().map(mapToPerson).collect(Collectors.toList());
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(pathName))))) {
+            persons = br.lines().map(mapToPerson).collect(Collectors.toList());
         }
         return persons;
+    }
+
+    private static List<String> filter(List<String> names, Predicate<String> condition) {
+        return names.stream().filter((name) -> (condition.apply(name))).collect(Collectors.toList());
+
     }
 
     private static Function<String, Person> mapToPerson = (line) -> {
@@ -60,20 +72,20 @@ public class StreamTest {
 
     @Test
     public void shouldSortTable() {
-        //given
+        // given
         int[] ints = new int[1000];
-        
+
         Arrays.parallelSetAll(ints, i -> random.nextInt(1000));
-        //when
-        //Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort:  {}", i));
+        // when
+        // Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort:  {}", i));
         int sumBefore = Arrays.stream(ints).limit(20).sum();
         Arrays.parallelSort(ints);
-        //Arrays.stream(ints).limit(10).forEach(i -> log.info(" after sort : {}", i));
+        // Arrays.stream(ints).limit(10).forEach(i -> log.info(" after sort : {}", i));
         int sumAfter = Arrays.stream(ints).limit(20).sum();
-        
-        //then
+
+        // then
         Assertions.assertThat(sumAfter).isLessThan(sumBefore);
-        
+
     }
 
 }
