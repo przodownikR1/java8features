@@ -47,9 +47,17 @@ public class StreamTest {
     }
 
     @Test
-    public void shouldFilterWork() {
+    public void shouldFilterLengthWork() {
         List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
         Assertions.assertThat(filter(languages, s-> (s.length()>3))).containsExactly("java","perl","fortran");
+    }
+    
+    @Test
+    public void shouldExplictLenghtFilterWork(){
+        Predicate<String> greaterThanThree = (n) -> n.length() >3;
+        List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
+        Assertions.assertThat(filter(languages, greaterThanThree)).containsExactly("java","perl","fortran");
+        
     }
 
     private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
@@ -87,5 +95,16 @@ public class StreamTest {
         Assertions.assertThat(sumAfter).isLessThan(sumBefore);
 
     }
-
+    @Test
+    public void shouldReduceWork(){
+        List<String> digitals = Lists.newArrayList("1","2","3","4");
+        String result = digitals.stream().reduce("AS-",String::concat);
+        System.err.println(result);
+    }
+    @Test
+    public void shouldReduceNumberWork(){
+        List<Integer> digitals = Lists.newArrayList(1,2,3,4);
+        int sum = digitals.stream().reduce(0,Integer::sum);
+        System.err.println(sum);
+    }
 }
