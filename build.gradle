@@ -92,7 +92,7 @@ jar {
 
     exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
     manifest {
-        attributes 'Implementation-Title': 'Gradle java8exercise',
+        attributes 'Implementation-Title': 'java8exercise',
         'Implementation-Version': version,
         'Built-By': System.getProperty('user.name'),
         'Built-Date': new Date(),
