@@ -5,11 +5,11 @@ ext {
       catchExceptionVersion = "1.2.0"
       festAssertVersion = "1.4"
       
-      slf4jVersion = "1.7.6"
-      logbackVersion = "1.1.1"
+      slf4jVersion = "1.7.7"
+      logbackVersion = "1.1.2"
       groovyVersion = "2.2.1"    
       lombokVersion = "1.12.4"
       guavaVersion = "16.0.1"
       javaVersion = "1.8"
-      springVersion = "4.0.4.RELEASE"
+      springVersion = "4.0.5.RELEASE"
 }
