@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,15 +51,15 @@ public class StreamTest {
     @Test
     public void shouldFilterLengthWork() {
         List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
-        Assertions.assertThat(filter(languages, s-> (s.length()>3))).containsExactly("java","perl","fortran");
+        Assertions.assertThat(filter(languages, s -> (s.length() > 3))).containsExactly("java", "perl", "fortran");
     }
-    
+
     @Test
-    public void shouldExplictLenghtFilterWork(){
-        Predicate<String> greaterThanThree = (n) -> n.length() >3;
+    public void shouldExplictLenghtFilterWork() {
+        Predicate<String> greaterThanThree = (n) -> n.length() > 3;
         List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
-        Assertions.assertThat(filter(languages, greaterThanThree)).containsExactly("java","perl","fortran");
-        
+        Assertions.assertThat(filter(languages, greaterThanThree)).containsExactly("java", "perl", "fortran");
+
     }
 
     private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
@@ -95,16 +97,27 @@ public class StreamTest {
         Assertions.assertThat(sumAfter).isLessThan(sumBefore);
 
     }
+
     @Test
-    public void shouldReduceWork(){
-        List<String> digitals = Lists.newArrayList("1","2","3","4");
-        String result = digitals.stream().reduce("AS-",String::concat);
-        System.err.println(result);
+    public void shouldReduceWork() {
+        List<String> digitals = Lists.newArrayList("1", "2", "3", "4");
+        String result = digitals.stream().reduce("AS-", String::concat);
+        log.info("{}", result);
     }
+
     @Test
-    public void shouldReduceNumberWork(){
-        List<Integer> digitals = Lists.newArrayList(1,2,3,4);
-        int sum = digitals.stream().reduce(0,Integer::sum);
-        System.err.println(sum);
+    public void shouldReduceNumberWork() {
+        List<Integer> digitals = Lists.newArrayList(1, 2, 3, 4);
+        int sum = digitals.stream().reduce(0, Integer::sum);
+        log.info("{}", sum);
     }
+
+    @Test
+    public void e() {
+        Stream<Date> stream = Stream.generate(() -> {
+            return new Date();
+        });
+        log.info("{}", stream.findFirst().get());
+    }
+
 }
