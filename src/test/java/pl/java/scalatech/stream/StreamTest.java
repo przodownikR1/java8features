@@ -13,14 +13,10 @@ import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.fest.assertions.Assertions;
 import org.junit.Test;
-
 import pl.java.scalatech.pojo.Person;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
