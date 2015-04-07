@@ -11,12 +11,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.fest.assertions.Assertions;
 import org.junit.Test;
+
 import pl.java.scalatech.pojo.Person;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -44,6 +50,19 @@ public class StreamTest {
 
     }
 
+    
+    @Test
+    public void shouldFilterNames(){
+        List<Person> persons = Lists.newArrayList(new Person("slawek", "przodownik", new BigDecimal(11)),
+                new Person("slawek", "przodownik2", new BigDecimal(11)),
+                new Person("aga", "poka", new BigDecimal(12)),
+                new Person("kalina", "bak", new BigDecimal(123))
+                );
+        List<Person> result = persons.stream().filter(p->p.getName().equals("slawek")).collect(Collectors.toList());
+        System.err.println(result);
+
+    }
+    
     @Test
     public void shouldFilterLengthWork() {
         List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
@@ -115,5 +134,25 @@ public class StreamTest {
         });
         log.info("{}", stream.findFirst().get());
     }
-
+    @Test
+    public void shouldRangeWork(){
+        Stream.generate(Math::random).limit(10).forEach(d->log.info("{},d"));
+    }
+    @Test
+    public void shouldfibGenerate(){
+        IntSupplier fib = new IntSupplier() {
+            private int previous =0;
+            private int current = 1;
+            @Override
+            public int getAsInt() {
+                int oldPrevious = this.previous;
+                int nextValue = this.previous + this.current;
+                this.previous = this.current;
+                this.current = nextValue;
+                return oldPrevious;
+            }
+        };
+        IntStream.generate(fib).limit(10).forEach(d -> log.info("{}",d));
+    }
+    
 }

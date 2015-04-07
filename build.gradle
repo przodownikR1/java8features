@@ -58,7 +58,7 @@ dependencies {
     compile ("org.springframework:spring-core:${springVersion}")
     compile ("org.springframework:spring-beans:${springVersion}")
     compile ("org.springframework:spring-context:${springVersion}")
-    compile ('commons-lang:commons-lang:20030203.000129')
+  
    
     compile("org.slf4j:slf4j-api:$slf4jVersion")
     compile("org.slf4j:slf4j-ext:$slf4jVersion")
