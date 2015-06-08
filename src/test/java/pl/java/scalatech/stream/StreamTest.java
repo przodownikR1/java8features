@@ -50,6 +50,19 @@ public class StreamTest {
 
     }
 
+    
+    @Test
+    public void shouldFilterNames(){
+        List<Person> persons = Lists.newArrayList(new Person("slawek", "przodownik", new BigDecimal(11)),
+                new Person("slawek", "przodownik2", new BigDecimal(11)),
+                new Person("aga", "poka", new BigDecimal(12)),
+                new Person("kalina", "bak", new BigDecimal(123))
+                );
+        List<Person> result = persons.stream().filter(p->p.getName().equals("slawek")).collect(Collectors.toList());
+        System.err.println(result);
+
+    }
+    
     @Test
     public void shouldFilterLengthWork() {
         List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");

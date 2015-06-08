@@ -9,7 +9,7 @@ ext {
       logbackVersion = "1.1.2"
       groovyVersion = "2.2.1"    
       lombokVersion = "1.12.4"
-      guavaVersion = "16.0.1"
+      guavaVersion = "18.0"
       javaVersion = "1.8"
-      springVersion = "4.0.5.RELEASE"
+      springVersion = "4.1.6.RELEASE"
 }
