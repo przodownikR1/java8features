@@ -17,7 +17,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 @Slf4j
 public class FilterTest {
@@ -65,7 +64,7 @@ public class FilterTest {
     public void shouldFluentInterationWork() {
 
         List<Worker> workers = FluentIterable.from(customers).filter(HIGH_SALARY).transform(WORKER_PRODUCERS).toList();
-        List<Worker> expected = Lists.newArrayList(new Worker("kalina borowiec"),new Worker("marek kalinowski"));
+        List<Worker> expected = Lists.newArrayList(new Worker("kalina borowiec"), new Worker("marek kalinowski"));
         Assertions.assertThat(workers).hasSize(2).isEqualTo(expected);
     }
 
