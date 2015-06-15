@@ -61,7 +61,6 @@ dependencies {
   
    
     compile("org.slf4j:slf4j-api:$slf4jVersion")
-    compile("org.slf4j:slf4j-ext:$slf4jVersion")
     runtime("ch.qos.logback:logback-classic:$logbackVersion")
     compile("ch.qos.logback:logback-core:$logbackVersion")
 
@@ -70,7 +69,7 @@ dependencies {
     testCompile("junit:junit:$junitVersion")
     testCompile("org.easytesting:fest-assert:${festAssertVersion}")
     testCompile("com.googlecode.catch-exception:catch-exception:1.2.0")
-
+    compile 'org.fusesource.jansi:jansi:1.11'
     
 }
 
