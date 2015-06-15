@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
@@ -154,5 +155,8 @@ public class StreamTest {
         };
         IntStream.generate(fib).limit(10).forEach(d -> log.info("{}",d));
     }
+    
+
+    
     
 }

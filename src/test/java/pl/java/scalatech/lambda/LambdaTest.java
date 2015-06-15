@@ -14,6 +14,11 @@ import com.google.common.collect.Lists;
  * @author przodownik
  * Module name :    java8features
  * Creating time :  14 maj 2014
+ * x -> x+1
+ * ()->42
+ * () -> {return 42}
+ * (x,y) -> {}
+ * () -> {}
  */
 @Slf4j
 public class LambdaTest {
