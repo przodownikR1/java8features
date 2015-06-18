@@ -36,12 +36,20 @@ import com.google.common.collect.Lists;
 public class StreamTest {
     private List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
     private Random random = new Random();
+
     List<Person> persons;
 
     @Before
     public void init() {
         persons = Lists.newArrayList(new Person("slawek", "przodownik", new BigDecimal(11)), new Person("slawek", "przodownik2", new BigDecimal(11)),
                 new Person("aga", "poka", new BigDecimal(12)), new Person("kalina", "bak", new BigDecimal(123)));
+    }
+
+    @Test
+    public void shouldSumSalaryForOnlyPersonWhenNameStartAtP() {
+        log.info("++++ salary :  {}",
+                persons.stream().filter(p -> p.getLogin().startsWith("p")).map(t -> t.getSalary()).reduce(BigDecimal.ZERO, BigDecimal::add));
+
     }
 
     @Test

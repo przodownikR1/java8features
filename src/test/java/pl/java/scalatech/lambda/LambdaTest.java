@@ -34,7 +34,7 @@ public class LambdaTest {
     @Test
     public void lambdaFirst() {
         Supplier<String> supplier1 = () -> "Hello";
-        Assertions.assertThat(supplier1).isEqualTo("Hello");
+        Assertions.assertThat(supplier1.get()).isEqualTo("Hello");
 
     }
 

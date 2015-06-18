@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import pl.java.scalatech.functional.bean.Country;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.collect.Lists;
 
 @Slf4j
@@ -80,8 +81,9 @@ public class FunctionTest {
 
     @Test
     public void shouldSimpleFunctionWork() {
-        final Function<Integer, String> fun = t -> "result is " + t;
-        assertThat(fun.apply(1)).isEqualTo("result is 10");
+        final Function<Integer, String> fun = t -> "result is  " + t;
+        String result = CharMatcher.WHITESPACE.trimAndCollapseFrom(fun.apply(1), ' ');
+        assertThat(result).isEqualTo("result is 1");
     }
 
     @Test
