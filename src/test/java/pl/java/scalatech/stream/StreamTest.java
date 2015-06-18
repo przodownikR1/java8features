@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
@@ -20,6 +19,7 @@ import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 
 import org.fest.assertions.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 
 import pl.java.scalatech.pojo.Person;
@@ -36,6 +36,13 @@ import com.google.common.collect.Lists;
 public class StreamTest {
     private List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
     private Random random = new Random();
+    List<Person> persons;
+
+    @Before
+    public void init() {
+        persons = Lists.newArrayList(new Person("slawek", "przodownik", new BigDecimal(11)), new Person("slawek", "przodownik2", new BigDecimal(11)),
+                new Person("aga", "poka", new BigDecimal(12)), new Person("kalina", "bak", new BigDecimal(123)));
+    }
 
     @Test
     public void sumStream() {
@@ -51,19 +58,19 @@ public class StreamTest {
 
     }
 
-    
     @Test
-    public void shouldFilterNames(){
-        List<Person> persons = Lists.newArrayList(new Person("slawek", "przodownik", new BigDecimal(11)),
-                new Person("slawek", "przodownik2", new BigDecimal(11)),
-                new Person("aga", "poka", new BigDecimal(12)),
-                new Person("kalina", "bak", new BigDecimal(123))
-                );
-        List<Person> result = persons.stream().filter(p->p.getName().equals("slawek")).collect(Collectors.toList());
-        System.err.println(result);
+    public void shouldFilterNames() {
+        List<Person> result = persons.stream().filter(p -> p.getName().equals("slawek")).collect(Collectors.toList());
+        log.info(" +++ {}", result);
 
     }
-    
+
+    @Test
+    public void shouldSortNames() {
+        List<String> sortNames = persons.stream().map(Person::getName).sorted().collect(Collectors.toList());
+        Assertions.assertThat(sortNames).containsExactly("aga", "kalina", "slawek", "slawek");
+    }
+
     @Test
     public void shouldFilterLengthWork() {
         List<String> languages = Lists.newArrayList("java", "c#", "perl", "fortran");
@@ -135,15 +142,18 @@ public class StreamTest {
         });
         log.info("{}", stream.findFirst().get());
     }
+
     @Test
-    public void shouldRangeWork(){
-        Stream.generate(Math::random).limit(10).forEach(d->log.info("{},d"));
+    public void shouldRangeWork() {
+        Stream.generate(Math::random).limit(10).forEach(d -> log.info("{},d"));
     }
+
     @Test
-    public void shouldfibGenerate(){
+    public void shouldfibGenerate() {
         IntSupplier fib = new IntSupplier() {
-            private int previous =0;
+            private int previous = 0;
             private int current = 1;
+
             @Override
             public int getAsInt() {
                 int oldPrevious = this.previous;
@@ -153,10 +163,7 @@ public class StreamTest {
                 return oldPrevious;
             }
         };
-        IntStream.generate(fib).limit(10).forEach(d -> log.info("{}",d));
+        IntStream.generate(fib).limit(10).forEach(d -> log.info("{}", d));
     }
-    
 
-    
-    
 }
