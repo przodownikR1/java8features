@@ -15,25 +15,22 @@ import org.junit.Test;
  */
 public class DateTimeTest {
 
-    private LocalDate getBirthDate() {
+    private static LocalDate getBirthDate() {
         return LocalDate.of(1979, Month.MAY, 3);
     }
 
-    private LocalTime getBirthDateTime() {
+    private static LocalTime getBirthDateTime() {
         return LocalTime.of(23, 34);
     }
-    
-    private LocalDateTime getBirthDateAccuracy(){
+
+    private static LocalDateTime getBirthDateAccuracy() {
         return LocalDateTime.of(1979, Month.MAY, 3, 23, 34);
     }
-    
 
-    private LocalDateTime getBirthDateAccuracyTwoWay(){
-        return LocalDateTime.of(getBirthDate(),getBirthDateTime());
+    private static LocalDateTime getBirthDateAccuracyTwoWay() {
+        return LocalDateTime.of(getBirthDate(), getBirthDateTime());
     }
-    
-    
-    
+
     @Test
     public void shouldMyBirthDateCreate() {
         LocalDate myBirthDate = getBirthDate();
@@ -48,10 +45,11 @@ public class DateTimeTest {
         Assertions.assertThat(myBirthDateTime.getHour()).isEqualTo(23);
         Assertions.assertThat(myBirthDateTime.getMinute()).isEqualTo(34);
     }
+
     @Test
     public void shouldMyBirthLocalDateTime() {
         LocalDateTime myBirthDateTime = getBirthDateAccuracy();
-        
+
         Assertions.assertThat(myBirthDateTime.getDayOfMonth()).isEqualTo(3);
         Assertions.assertThat(myBirthDateTime.getMonth()).isEqualTo(Month.MAY);
         Assertions.assertThat(myBirthDateTime.getHour()).isEqualTo(23);

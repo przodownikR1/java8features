@@ -1,17 +1,10 @@
-import java.lang.annotation.Target;
-
 apply plugin: "groovy"
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
 apply plugin: 'project-report'
-apply plugin: 'pmd'
 apply plugin: 'application'
 apply plugin: 'build-dashboard'
-apply plugin: 'codenarc'
 apply from: './properties.gradle'
-
-
 description = "java 8 features"
 
 applicationDefaultJvmArgs = ["-Dfile.encoding=UTF=8"]
@@ -101,5 +94,6 @@ jar {
 }
 
 
-task wrapper(type: Wrapper) { gradleVersion = '10.1' }
-
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}

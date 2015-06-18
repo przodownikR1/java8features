@@ -1,5 +1,7 @@
 package pl.java.scalatech.functional;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -74,6 +76,18 @@ public class FunctionTest {
 
     static void display(Supplier<Integer> arg) {
         log.info("+++  {}", arg.get());
+    }
+
+    @Test
+    public void shouldSimpleFunctionWork() {
+        final Function<Integer, String> fun = t -> "result is " + t;
+        assertThat(fun.apply(1)).isEqualTo("result is 10");
+    }
+
+    @Test
+    public void shouldSimpleSupplierWork2() {
+        final Supplier<Integer> answer = () -> 10;
+        assertThat(answer.get()).isEqualTo(10);
     }
 
 }
