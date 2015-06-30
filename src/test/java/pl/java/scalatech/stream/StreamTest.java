@@ -1,10 +1,5 @@
 package pl.java.scalatech.stream;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
@@ -19,9 +14,9 @@ import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 
 import org.fest.assertions.Assertions;
-import org.junit.Before;
 import org.junit.Test;
 
+import pl.java.scalatech.common.DataPrepareTest;
 import pl.java.scalatech.pojo.Person;
 
 import com.google.common.base.Predicate;
@@ -33,50 +28,13 @@ import com.google.common.collect.Lists;
  *         Creating time : 24 mar 2014 13:45:39
  */
 @Slf4j
-public class StreamTest {
-    private List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
-    private Random random = new Random();
-
-    List<Person> persons;
-
-    @Before
-    public void init() {
-        persons = Lists.newArrayList(new Person("slawek", "przodownik", new BigDecimal(11)), new Person("slawek", "przodownik2", new BigDecimal(11)),
-                new Person("aga", "poka", new BigDecimal(12)), new Person("kalina", "bak", new BigDecimal(123)));
-    }
-
-    @Test
-    public void shouldSumSalaryForOnlyPersonWhenNameStartAtP() {
-        log.info("++++ salary :  {}",
-                persons.stream().filter(p -> p.getLogin().startsWith("p")).map(t -> t.getSalary()).reduce(BigDecimal.ZERO, BigDecimal::add));
-
-    }
-
-    @Test
-    public void sumStream() {
-        int sum = values.stream().mapToInt(value -> value).sum();
-        log.info("{}", sum);
-        Assertions.assertThat(sum).isEqualTo(36);
-    }
-
-    @Test
-    public void shouldBufferedReaderAsStream() throws IOException {
-        Assertions.assertThat(readAndConvertToPersonList("./src/test/resources/persons.csv")).hasSize(6)
-                .contains(new Person("slawek", "przodownik", new BigDecimal(110)));
-
-    }
+public class StreamTest extends DataPrepareTest {
 
     @Test
     public void shouldFilterNames() {
         List<Person> result = persons.stream().filter(p -> p.getName().equals("slawek")).collect(Collectors.toList());
         log.info(" +++ {}", result);
 
-    }
-
-    @Test
-    public void shouldSortNames() {
-        List<String> sortNames = persons.stream().map(Person::getName).sorted().collect(Collectors.toList());
-        Assertions.assertThat(sortNames).containsExactly("aga", "kalina", "slawek", "slawek");
     }
 
     @Test
@@ -93,23 +51,10 @@ public class StreamTest {
 
     }
 
-    private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
-        List<Person> persons = null;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(pathName))))) {
-            persons = br.lines().map(mapToPerson).collect(Collectors.toList());
-        }
-        return persons;
-    }
-
     private static List<String> filter(List<String> names, Predicate<String> condition) {
         return names.stream().filter((name) -> (condition.apply(name))).collect(Collectors.toList());
 
     }
-
-    private static Function<String, Person> mapToPerson = (line) -> {
-        String[] p = line.split(",");
-        return new Person(p[0], p[1], new BigDecimal(p[2]));
-    };
 
     @Test
     public void shouldSortTable() {
@@ -145,7 +90,8 @@ public class StreamTest {
 
     @Test
     public void e() {
-        Stream<Date> stream = Stream.generate(() -> {
+        Stream<Date> stream = Stream.generate(() ->
+        {
             return new Date();
         });
         log.info("{}", stream.findFirst().get());
@@ -172,6 +118,12 @@ public class StreamTest {
             }
         };
         IntStream.generate(fib).limit(10).forEach(d -> log.info("{}", d));
+    }
+    @Test
+    public void shouldBuildStreamInt() {
+        IntStream is = random.ints();
+        log.info(" random stream :  {} ","test");
+        is.filter(i -> i < 100 && i > 0).limit(20).forEach(i -> log.info("{}",i));
     }
 
 }
