@@ -28,6 +28,9 @@ public class MapTest extends DataPrepareTest{
         assertThat(sortNames).containsExactly("aga", "kalina", "slawek", "slawek");
     }
     
+    
+    
+    
    @Test
     public void shouldAllMatchWork() {
        List<String> sortNames = persons.stream().map(Person::getName).collect(Collectors.toList());
@@ -47,6 +50,7 @@ public class MapTest extends DataPrepareTest{
     private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
         List<Person> persons = null;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(pathName))))) {
+            //stream -> br.lines()
             persons = br.lines().map(mapToPerson).collect(Collectors.toList());
         }
         return persons;

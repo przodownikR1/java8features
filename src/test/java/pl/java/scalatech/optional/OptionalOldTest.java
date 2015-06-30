@@ -1,5 +1,7 @@
 package pl.java.scalatech.optional;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,7 +9,6 @@ import java.util.function.Supplier;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,10 +54,29 @@ public class OptionalOldTest {
             log.info("is present!");
         }
         customerName.ifPresent(x -> log.info("isPresent  {}", x));
-        Assertions.assertThat("notFound").isEqualTo(customerName.orElse("notFound"));
-        Assertions.assertThat(customerName.orElseGet(generateRandomString())).isNotEmpty();
+        assertThat("notFound").isEqualTo(customerName.orElse("notFound"));
+        assertThat(customerName.orElseGet(generateRandomString())).isNotEmpty();
         // log.info("orElseGet {}", );
         // orElseThrow(RuntimeException::new);
+    }
+
+    @Test
+    public void shouldOptionalAsNullWork() {
+        Optional<String> name = Optional.ofNullable(null);
+        assertThat(name.isPresent()).isFalse();
+
+        assertThat(name.orElseGet(() -> "borowiec")).isEqualTo("borowiec");
+
+        assertThat(name.map(s -> "Hello " + s + "!").orElse("kowalski")).isEqualTo("kowalski");
+    }
+    @Test
+    public void shouldOptionalAsExistsNameWork() {
+        Optional<String> name = Optional.ofNullable("borowiec");
+        assertThat(name.isPresent()).isTrue();
+
+        assertThat(name.orElseGet(() -> "kowalski")).isEqualTo("borowiec");
+
+        assertThat(name.map(s -> "Hello " + s + "!").orElse("kowalskie")).isEqualTo("Hello borowiec!");
     }
 
     Optional<String> simulateCustomer(String userId) {
