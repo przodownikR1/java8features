@@ -12,9 +12,13 @@ import org.junit.Test;
 
 import pl.java.scalatech.guava.Customer;
 
+import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
+import com.carrotsearch.junitbenchmarks.annotation.BenchmarkHistoryChart;
 import com.google.gson.Gson;
 
 @Slf4j
+@AxisRange
+@BenchmarkHistoryChart(filePrefix = "test-chart", maxRuns = 20)
 public class PerfJsonTest {
     private Gson gson = new Gson();
     @Rule
