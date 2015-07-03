@@ -10,8 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.fest.assertions.Assertions;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestRule;
 
+import com.carrotsearch.junitbenchmarks.BenchmarkRule;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 
@@ -27,6 +30,10 @@ import com.google.common.collect.Lists;
  */
 @Slf4j
 public class LambdaTest {
+
+    @Rule
+    public TestRule benchmarkRun = new BenchmarkRule();
+
     private List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
 
     int total = 0;

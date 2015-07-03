@@ -62,6 +62,8 @@ dependencies {
     testCompile("junit:junit:$junitVersion")
     testCompile("org.easytesting:fest-assert:${festAssertVersion}")
     testCompile("com.googlecode.catch-exception:catch-exception:1.2.0")
+    
+    testCompile 'com.carrotsearch:junit-benchmarks:0.7.2'
     compile 'org.fusesource.jansi:jansi:1.11'
     
 }

@@ -1,15 +1,10 @@
 package pl.java.scalatech.stream;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import java.util.function.IntSupplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -20,13 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.fest.assertions.Assertions;
 import org.junit.Test;
-import org.springframework.util.StopWatch;
 
 import pl.java.scalatech.common.DataPrepareTest;
 import pl.java.scalatech.pojo.Person;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 
 /**
@@ -39,21 +32,15 @@ public class StreamTest extends DataPrepareTest {
 
     @Test
     public void shouldJoinAndToSetWork() {
-        String names = persons
-                .stream()
-                .map(Person::getName)
-                .collect(Collectors.joining(", ")) ;
+        String names = persons.stream().map(Person::getName).collect(Collectors.joining(", "));
         Assertions.assertThat(names).isEqualTo("slawek, slawek, aga, kalina");
-        
-        Set<String> setOfPersons = persons
-                .stream().map(Person::getName)
-                .collect(
-                Collectors.toSet()) ;
+
+        Set<String> setOfPersons = persons.stream().map(Person::getName).collect(Collectors.toSet());
         Assertions.assertThat(setOfPersons).containsOnly("kalina", "slawek", "aga");
         Assertions.assertThat(setOfPersons).hasSize(3);
-        
+
     }
-    
+
     @Test
     public void shouldFilterNames() {
         List<Person> result = persons.stream().filter(p -> p.getName().equals("slawek")).collect(Collectors.toList());
@@ -114,8 +101,7 @@ public class StreamTest extends DataPrepareTest {
 
     @Test
     public void e() {
-        Stream<Date> stream = Stream.generate(() ->
-        {
+        Stream<Date> stream = Stream.generate(() -> {
             return new Date();
         });
         log.info("{}", stream.findFirst().get());
@@ -187,7 +173,5 @@ public class StreamTest extends DataPrepareTest {
         Assertions.assertThat(sorted).hasSize(5);
         log.info("{}", Arrays.toString(sorted));
     }
-
-   
 
 }
