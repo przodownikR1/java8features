@@ -5,6 +5,7 @@ apply plugin: 'project-report'
 apply plugin: 'application'
 apply plugin: 'build-dashboard'
 apply from: './properties.gradle'
+//apply plugin: 'info.solidsoft.pitest'
 description = "java 8 features"
 
 applicationDefaultJvmArgs = ["-Dfile.encoding=UTF=8"]
@@ -12,6 +13,25 @@ libsDirName = './target'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.1'
+    }
+}
+apply plugin: 'info.solidsoft.pitest'
+
+pitest {
+    targetClasses = ['pl.java.scalatech.*']
+    pitestVersion = "1.1.0"
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    excludedMethods = ['equals', 'hashCode']
+}
 
 [compileJava, compileTestJava]*.options*.compilerArgs = [
     "-Xlint:none",
@@ -21,6 +41,7 @@ targetCompatibility = 1.8
 ]
 
 repositories {
+    jcenter()
     mavenCentral()
     mavenLocal()
     maven { url "http://repo.spring.io/libs-release-local/"}
@@ -59,7 +80,7 @@ dependencies {
 
     testCompile("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testCompile("org.mockito:mockito-all:$mockitoVersion")
-    testCompile("junit:junit:$junitVersion")
+    compile("junit:junit:$junitVersion")
     testCompile("org.easytesting:fest-assert:${festAssertVersion}")
     testCompile("com.googlecode.catch-exception:catch-exception:1.2.0")
     compile'com.google.code.gson:gson:2.3.1'
@@ -67,7 +88,7 @@ dependencies {
     testCompile 'org.databene:contiperf:2.3.4'
     
     compile 'org.fusesource.jansi:jansi:1.11'
-    
+   
 }
 
 //configurations {
