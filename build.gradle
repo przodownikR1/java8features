@@ -64,6 +64,9 @@ dependencies {
     testCompile("com.googlecode.catch-exception:catch-exception:1.2.0")
     
     testCompile 'com.carrotsearch:junit-benchmarks:0.7.2'
+    
+    testCompile 'org.databene:contiperf:2.3.4'
+    
     compile 'org.fusesource.jansi:jansi:1.11'
     
 }
