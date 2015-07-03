@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -118,5 +119,22 @@ public class MapTest extends DataPrepareTest {
         assertThat(dsStatistics.getSum()).isEqualTo(6.6d);
         assertThat(dsStatistics.getAverage()).isEqualTo(2.1999999999999997d);
         log.info("Double Statistics: {}", dsStatistics);
+    }
+
+    @Test
+    public void shouldLongSummaryStatisticsWork() {
+        //given
+        LongSummaryStatistics timeDurations = new LongSummaryStatistics();
+        //when
+        timeDurations.accept(50);
+        timeDurations.accept(44);
+        timeDurations.accept(4);
+        //then
+        assertThat(timeDurations.getMax()).isEqualTo(50);
+        assertThat(timeDurations.getMin()).isEqualTo(4);
+        assertThat(timeDurations.getSum()).isEqualTo(98);
+        assertThat(timeDurations.getCount()).isEqualTo(3);
+        log.info("long statistics {}", timeDurations);
+
     }
 }
