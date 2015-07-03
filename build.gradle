@@ -20,7 +20,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.1'
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.4'
     }
 }
 apply plugin: 'info.solidsoft.pitest'
@@ -32,6 +32,9 @@ pitest {
     outputFormats = ['XML', 'HTML']
     excludedMethods = ['equals', 'hashCode']
 }
+
+
+
 
 [compileJava, compileTestJava]*.options*.compilerArgs = [
     "-Xlint:none",
