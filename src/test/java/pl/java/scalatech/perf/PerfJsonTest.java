@@ -1,5 +1,30 @@
 package pl.java.scalatech.perf;
 
-public class PerfJsonTest {
+import java.math.BigDecimal;
 
+import lombok.extern.slf4j.Slf4j;
+
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import pl.java.scalatech.guava.Customer;
+
+import com.google.gson.Gson;
+
+@Slf4j
+public class PerfJsonTest {
+    private Gson gson = new Gson();
+    @Rule
+    public ContiPerfRule i = new ContiPerfRule();
+
+    @Test
+    @PerfTest(invocations = 50, threads = 5)
+    @Required(average = 4, totalTime = 40, percentile95 = 25)
+    public void shouldMeasureJsonMarshalling() {
+        String json = gson.toJson(Customer.builder().firstName("slawek").firstName("borowiec").salary(new BigDecimal(100)).build());
+        log.info("{}", json);
+    }
 }

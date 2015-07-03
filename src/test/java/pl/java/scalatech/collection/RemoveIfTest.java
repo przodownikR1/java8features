@@ -74,4 +74,17 @@ public class RemoveIfTest {
         ret = capitols.remove("TEST", "test");
         assertThat(ret).isTrue();
     }
+    /*
+     * Map.replace(K, V)
+     * if (map.containsKey(key)) {
+     * return map.put(key, value);
+     * } else
+     * return null;
+     * Map.replace(K, V, V)
+     * if (map.containsKey(key) && Objects.equals(map.get(key), value)) {
+     * map.put(key, newValue);
+     * return true;
+     * } else
+     * return false;
+     */
 }
