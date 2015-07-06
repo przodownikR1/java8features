@@ -26,7 +26,7 @@ public class PerfJsonTest {
 
     @Test
     @PerfTest(invocations = 50, threads = 5)
-    @Required(average = 7, totalTime = 50, percentile95 = 25)
+    @Required(average = 7, totalTime = 6000, percentile95 = 25)
     public void shouldMeasureJsonMarshalling() {
         String json = gson.toJson(Customer.builder().firstName("slawek").firstName("borowiec").salary(new BigDecimal(100)).build());
         log.info("{}", json);
