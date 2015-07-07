@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +20,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+import com.google.common.io.Resources;
 
 @Slf4j
 public class URLTest {
@@ -26,12 +29,14 @@ public class URLTest {
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
     private File fileTemp;
+    private URL url;
 
     @Before
     public void initStep() throws IOException {
         testFolder.newFolder("test_");
         fileTemp = testFolder.newFile("t.txt");
         log.info("file :  {}", file.getAbsolutePath());
+        url = new URL("http://przewidywalna-java.blogspot.com/");
 
     }
 
@@ -50,7 +55,7 @@ public class URLTest {
 
     @Test
     public void shouldURLConnect() throws IOException {
-        URL url = new URL("http://przewidywalna-java.blogspot.com/");
+
         StringBuilder fileContent;
         try (InputStream in = url.openStream(); BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, Charsets.UTF_8));) {
             fileContent = new StringBuilder();
@@ -61,5 +66,12 @@ public class URLTest {
             }
         }
         assertThat(fileContent.toString().contains("przewidywalna-java.blogspot.com/search/label")).isTrue();
+    }
+
+    @Test
+    public void shouldCopyContentFromURL2File() throws IOException {
+        Resources.asByteSource(url).copyTo(Files.asByteSink(fileTemp));
+        String line = Files.readFirstLine(fileTemp, Charset.defaultCharset());
+        assertThat(line).isEqualTo("<!DOCTYPE html>");
     }
 }
