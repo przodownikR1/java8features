@@ -12,13 +12,28 @@ import java.net.URL;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import com.google.common.base.Charsets;
 
 @Slf4j
 public class URLTest {
+
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
+    private File fileTemp;
+
+    @Before
+    public void initStep() throws IOException {
+        testFolder.newFolder("test_");
+        fileTemp = testFolder.newFile("t.txt");
+        log.info("file :  {}", file.getAbsolutePath());
+
+    }
 
     private static File file;
     private URI fileLocation;
