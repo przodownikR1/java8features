@@ -1,8 +1,10 @@
 package pl.java.scalatech.stream;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.IntSupplier;
@@ -173,5 +175,6 @@ public class StreamTest extends DataPrepareTest {
         Assertions.assertThat(sorted).hasSize(5);
         log.info("{}", Arrays.toString(sorted));
     }
+    
 
 }
