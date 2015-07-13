@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.attribute.BasicFileAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -73,5 +74,9 @@ public class URLTest {
         Resources.asByteSource(url).copyTo(Files.asByteSink(fileTemp));
         String line = Files.readFirstLine(fileTemp, Charset.defaultCharset());
         assertThat(line).isEqualTo("<!DOCTYPE html>");
+        BasicFileAttributes attr = java.nio.file.Files.readAttributes(fileTemp.toPath(), BasicFileAttributes.class);
+        long fileSize = attr.size();
+        log.info("attr,  {}   ", attr.size());
+
     }
 }
