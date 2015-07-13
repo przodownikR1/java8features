@@ -94,7 +94,8 @@ dependencies {
     testCompile 'com.carrotsearch:junit-benchmarks:0.7.2'
     testCompile 'org.databene:contiperf:2.3.4'
     testCompile 'org.assertj:assertj-core:3.1.0'
-    testCompile 'com.jayway.awaitility:awaitility-java8:1.6.1' 
+    testCompile 'com.jayway.awaitility:awaitility-java8:1.6.1'
+     
     compile 'org.fusesource.jansi:jansi:1.11'
    
 }
