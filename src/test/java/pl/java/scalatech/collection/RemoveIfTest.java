@@ -5,18 +5,28 @@ import static com.google.common.collect.Maps.newHashMap;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import pl.java.scalatech.common.DataPrepareTest;
 
 @Slf4j
-public class RemoveIfTest {
+public class RemoveIfTest extends DataPrepareTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Map<String, String> capitols = newHashMap();
 
+    @Override
     @Before
     public void init() {
         capitols.put("Poland", "Warsaw");
@@ -74,6 +84,7 @@ public class RemoveIfTest {
         ret = capitols.remove("TEST", "test");
         assertThat(ret).isTrue();
     }
+
     /*
      * Map.replace(K, V)
      * if (map.containsKey(key)) {
@@ -87,4 +98,36 @@ public class RemoveIfTest {
      * } else
      * return false;
      */
+
+    @Test
+    public void shouldRemoveOddButConcurrentModificationExceptionThrow() {
+        thrown.expect(ConcurrentModificationException.class);
+        for (Integer i : values) {
+            if (i % 2 == 0) {
+                values.remove(i);
+            }
+        }
+        log.info("{}", values);
+    }
+
+    @Test
+    public void shouldRemoveOddUseIterator() {
+        //given
+        Assertions.assertThat(values).contains(1, 2, 3, 4, 6, 7, 8);
+        //when
+        for (Iterator<Integer> i = values.iterator(); i.hasNext();) {
+            if (i.next() % 2 == 0) {
+                i.remove();
+            }
+        }
+        //then
+        Assertions.assertThat(values).contains(1, 3, 5, 7);
+    }
+
+    @Test
+    public void shouldRemoveOddUseJava8Features() {
+        values.removeIf(i -> i % 2 == 0);
+        Assertions.assertThat(values).contains(1, 3, 5, 7);
+    }
+
 }

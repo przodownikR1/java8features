@@ -14,7 +14,7 @@ public abstract class DataPrepareTest {
     protected List<Person> persons;
     protected List<Integer> values = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8);
     protected Random random = new Random();
-    
+    protected List<String> names = Lists.newArrayList("slawek", "bak", "agnieszka", "slawek", "bak", "bak", "tyson");
 
     @Before
     public void init() {
