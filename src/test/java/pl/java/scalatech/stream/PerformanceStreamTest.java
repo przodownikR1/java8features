@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Test;
 
 import com.google.common.base.Stopwatch;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class PerformanceStreamTest {
@@ -49,5 +49,7 @@ public class PerformanceStreamTest {
         log.info("+++ parallelTest3  {}", sw.elapsed(TimeUnit.MILLISECONDS));
 
     }
+
+
 
 }

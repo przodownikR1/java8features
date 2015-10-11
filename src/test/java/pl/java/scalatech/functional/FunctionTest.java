@@ -3,20 +3,20 @@ package pl.java.scalatech.functional;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.fest.assertions.Assertions;
 import org.junit.Test;
 
-import pl.java.scalatech.functional.bean.Country;
-
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.Lists;
+
+import lombok.extern.slf4j.Slf4j;
+import pl.java.scalatech.functional.bean.Country;
 
 @Slf4j
 public class FunctionTest {
@@ -90,6 +90,38 @@ public class FunctionTest {
     public void shouldSimpleSupplierWork2() {
         final Supplier<Integer> answer = () -> 10;
         assertThat(answer.get()).isEqualTo(10);
+    }
+   @Test
+    public void simpleBiFunctionTest() {
+       BiFunction<Integer, Integer,Integer > addInteger = (a,b)  -> a +b ;
+       assertThat(addInteger.apply(3, 7)).isEqualTo(10);
+       UnaryOperator<Integer> next = x -> x+2;
+       assertThat(next.apply(3)).isEqualTo(5);
+       assertThat(addInteger.andThen(next).apply(3, 2)).isEqualTo(7);
+
+       BiFunction<String, String, String> concat = (a,b) -> a + b;
+       log.info("{}",concat.apply("Hello ", "slawek"));
+
+
+    }
+   @Test
+   public void testFunctionConcatMethod() {
+          stringCounter(x->  x +" : " + x.length(),Lists.newArrayList("Slawek","kalina","jola"));
+   }
+
+   public static void stringCounter(Function<String, String> greeter,List<String> list) {
+       for(String name : list) {
+       log.info("{}",greeter.apply(name));
+       }
+       }
+
+    @Test
+    public void simpleFunctionTest() {
+        Function<String, String > add = x ->  "Hello " +x ;
+        assertThat(add.apply("slawek")).isEqualTo("Hello slawek");
+
+
+
     }
 
 }
