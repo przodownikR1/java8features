@@ -1,13 +1,14 @@
 package pl.java.scalatech.predicate;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class FunctionTest {
 
     Db db = new Db();
@@ -24,9 +25,11 @@ public class FunctionTest {
     
     @Test
     public void shouldStatusStateWork(){ 
-        BiFunction<Factor, Process ,Factor> flow = (f,p) -> us.updateStatus(f.getId(), Process.START); 
+        BiFunction<Factor, Process ,Factor> flow = (f,p) -> us.updateStatus(f.getId(), p); 
        
-        db.getFactors().stream();;
+        
+        
+        db.getFactors().stream().filter(t->t.getState()==Process.START).map(f->us.updateStatus(f.getId(), Process.END)).forEach(l->log.info("{}",l));
         
     }
     

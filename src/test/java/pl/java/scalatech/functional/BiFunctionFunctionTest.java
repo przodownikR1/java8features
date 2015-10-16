@@ -5,6 +5,7 @@ import static org.assertj.core.util.Lists.newArrayList;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,10 @@ public class BiFunctionFunctionTest {
         for (String name : newArrayList("Alice", "Bob", "Cathy")) {
          log.info("{}",greeter.apply(name));
         }
+        }
+        @Test
+        public void shouldBiFunctionWork(){
+            BiFunction<Integer, Integer, String> biFunction = (num1, num2) -> "Result:" +(num1 + num2);
+            Assertions.assertThat(biFunction.apply(1, 2)).isEqualTo("Result:3");
         }
 }
