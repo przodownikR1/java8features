@@ -4,18 +4,22 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
-import static pl.java.scalatech.referenceType.Simple.builder;
+import static pl.java.scalatech.Simple.builder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import javafx.geometry.Side;
 import lombok.extern.slf4j.Slf4j;
+import pl.java.scalatech.Simple;
 @Slf4j
 public class ReferenceTest {
 
@@ -45,7 +49,51 @@ public class ReferenceTest {
        assertThat(simpleProducer.apply("slawek", 34)).isEqualTo(Simple.builder().name("slawek").value(34).build());
        
        
-       
     }
-   
+    
+    @Test
+    public void shouldSupplierWork(){
+        
+        
+        Supplier<Simple> simple = Simple::new;
+        log.info("{}",simple.get());
+        
+        Supplier<Simple> simple1 = () -> new Simple("test",1);
+        log.info("{}",simple1.get());
+
+        BiFunction<String, Integer, Simple> simpleProducer = Simple::new;
+        log.info("Simple :  {}",simpleProducer.apply("slawek", 34));
+        assertThat(simpleProducer.apply("slawek", 34)).isEqualTo(Simple.builder().name("slawek").value(34).build());;
+
+        Function<String, Simple> created = s -> new Simple(s);
+        assertThat(created.apply("Kalina").getName()).isEqualTo("Kalina");
+        
+    }
+    
+    @Test
+    public void createObject(){
+        List<String> names = Arrays.asList("A","B","C");
+        List<Simple> simples = map(names, Simple::new);
+        log.info("created : {}",simples);
+        
+    }
+    public static List<Simple> map(List<String> list,Function<String, Simple> f){
+        List<Simple> result = new ArrayList<>();
+        for(String e: list){
+        result.add(f.apply(e));
+        }
+        return result;
+        }
+    
+    
+    
+    public interface TriFunction<T, U, V, R>{
+        R apply(T t, U u, V v);
+        }
+    
+    @Test
+    public void shouldCreateSimpleBasedOnThreeArgs(){
+        TriFunction<String, Integer, Boolean, Simple> s = Simple::new;
+        log.info("{}",s.apply("slawek", 23, false));
+    }
 }
