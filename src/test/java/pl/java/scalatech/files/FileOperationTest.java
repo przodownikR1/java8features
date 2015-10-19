@@ -1,5 +1,6 @@
 package pl.java.scalatech.files;
 
+import static com.google.common.io.Files.write;
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
 import java.io.File;
@@ -46,8 +47,7 @@ public class FileOperationTest {
     public void shouldWriteString2File() throws IOException {
 
         log.info("{}", output.getAbsolutePath());
-        Files.write("przodownik", output, Charset.defaultCharset());
-        ;
+        write("przodownik", output, Charset.defaultCharset());
         String result = Files.readFirstLine(output, Charset.defaultCharset());
         assertThat(result).isEqualTo("przodownik");
 

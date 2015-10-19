@@ -1,5 +1,7 @@
 package pl.java.scalatech.exercises.one;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,7 +18,7 @@ public class StreamSupplierTest {
        
        Stream<Customer> customerStream = Stream.generate(CustomerSupplier.INSTANCE);
        List<Customer> persons = customerStream.limit(30).collect(Collectors.toList());
-       Assertions.assertThat(persons).hasSize(30);
+       assertThat(persons).hasSize(30);
        
     }
    @Test
