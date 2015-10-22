@@ -28,6 +28,16 @@ public class FilesTest {
         findContentInFiles(path, "Class");
     }
 
+    @Test
+    @SneakyThrows
+    public void shouldFilesFind() {
+        Path start = FileSystems.getDefault().getPath("/home/przodownik/blog/java8features/src/main");
+         Stream<Path> stream = Files.find(start, 10, (path,atrrs) -> (
+
+                 path.endsWith(".java")));
+         stream.forEach(l->log.info("{}",l.getFileName()));
+    }
+
     @SneakyThrows(value = IOException.class)
     public static Stream<String> lines(Path path) {
 
