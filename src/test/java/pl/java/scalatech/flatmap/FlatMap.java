@@ -2,6 +2,7 @@ package pl.java.scalatech.flatmap;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,5 +18,18 @@ public class FlatMap {
                 .collect(Collectors.toList());
       log.info("{}",together);          
     }
+    @Test
+    public void shouldFlatMapWork2(){
+    Optional<Integer> maybeA = Optional.of(1);
+    Optional<Integer> maybeB = Optional.of(2);
+    Optional<Integer> maybeC = Optional.of(3);
 
+    log.info("{}",
+      maybeA.flatMap(a ->
+        maybeB.flatMap(b ->
+          maybeC.map(c -> a + b + c)
+        )
+      )
+    );
+    }
 }
