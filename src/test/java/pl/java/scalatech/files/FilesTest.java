@@ -44,6 +44,8 @@ public class FilesTest {
         return Files.lines(path);
 
     }
+
+    
     @SneakyThrows
     public static void findContentInFiles(Path dir,String content) {
     try (Stream<Path> stream = Files.walk(dir).parallel().filter(Files::isRegularFile).peek(l->log.info("{}",l))) {

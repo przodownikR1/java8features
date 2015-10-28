@@ -53,7 +53,8 @@ public class ComputeIsAbsentTest {
         intMap.put(1, "Value1");
         intMap.put(2, "Value2");
         intMap.computeIfAbsent(3, e -> "" + "Value".length());
-        intMap.computeIfAbsent(3, e -> "" + "Value".length());
+        intMap.computeIfAbsent(3, e -> "" + "Value1".length());//ommit
+        intMap.computeIfAbsent(5, e -> "" + "Value1".length());
         intMap.keySet().stream().forEach(s -> log.info("compute {} {}", s, intMap.get(s)));
     }
 

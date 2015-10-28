@@ -71,6 +71,19 @@ public class ReferenceTest {
     }
     
     @Test
+    public void simpleTest(){
+        List<String> str = Arrays.asList("aaaa","bbbbb","AAAA","BBBBB","slawek");
+        str.sort((s1, s2) -> s1.compareToIgnoreCase(s2));
+       
+        str.sort(String::compareToIgnoreCase);
+        
+        String x = "sla";
+        log.info("{}",str.stream().filter(c->c.contains(x)).findAny());
+        
+                     
+    }
+    
+    @Test
     public void createObject(){
         List<String> names = Arrays.asList("A","B","C");
         List<Simple> simples = map(names, Simple::new);
