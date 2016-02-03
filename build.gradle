@@ -70,6 +70,8 @@ sourceSets {
 }
 
 dependencies {
+    
+    compile 'io.reactivex:rxjava:1.1.0'
     compile ("org.codehaus.groovy:groovy:${groovyVersion}")
     compile("org.projectlombok:lombok:${lombokVersion}")
     compile("com.google.guava:guava:${guavaVersion}")    
