@@ -1,11 +1,12 @@
 package pl.java.scalatech.pojo;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Builder;
 
 /**
  * @author przodownik
@@ -16,9 +17,13 @@ import lombok.experimental.Builder;
 @NoArgsConstructor
 @Data
 @Builder
-public class Person {
+public class Person implements Comparator<Person>{
 
     private String name;
     private String login;
     private BigDecimal salary;
+    @Override
+    public int compare(Person o1, Person o2) {
+        return o1.getSalary().compareTo(o2.getSalary());
+    }
 }
