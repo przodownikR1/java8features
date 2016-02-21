@@ -55,6 +55,8 @@ public class CollectorsTest extends DataPrepareTest {
         Assertions.assertThat(sum2).isEqualByComparingTo(valueOf(54));
         BigDecimal sum3 = persons.stream().collect(Collectors.reducing(BigDecimal.ZERO,Person::getSalary,BigDecimal::add));
         Assertions.assertThat(sum3).isEqualByComparingTo(valueOf(54));
+        Optional<BigDecimal> result = persons.stream().map(Person::getSalary).reduce(BigDecimal::add);
+        Assertions.assertThat(result.get()).isEqualByComparingTo(valueOf(54));
         
 
     }
