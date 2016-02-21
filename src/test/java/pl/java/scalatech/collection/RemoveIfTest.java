@@ -2,12 +2,18 @@ package pl.java.scalatech.collection;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
+import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -128,6 +134,43 @@ public class RemoveIfTest extends DataPrepareTest {
     public void shouldRemoveOddUseJava8Features() {
         values.removeIf(i -> i % 2 == 0);
         Assertions.assertThat(values).contains(1, 3, 5, 7);
+    }
+    @Test(expected=UnsupportedOperationException.class)
+    
+    public void aTest(){
+        List<String> vs = Arrays.asList("slawek","borowiec","polska","przodownik");
+        
+        
+        vs.removeIf(s->s.length()>6);
+        log.info("vs : {}",vs);
+    }
+    @Test
+    public void testNoParallel(){
+        Collection<String> list = newArrayList("kalina", "karol", "slawek", "pawel", "agnieszka","przodownik");
+        List<String> result = list.stream().peek(t -> {
+            log.info("++++ no parallel t");
+             try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+             
+            }
+            
+        }).filter(s->s.length()>6).map(s->s.toUpperCase()).collect(toList());
+        log.info("result : {}",result);
+    }
+    @Test
+    public void testParallel(){
+        Collection<String> list = newArrayList("kalina", "karol", "slawek", "pawel", "agnieszka","przodownik");
+        List<String> result = list.stream().parallel().peek(t -> {
+            log.info("++++ parallel t");
+             try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+             
+            }
+            
+        }).filter(s->s.length()>6).map(s->s.toUpperCase()).collect(toList());
+        log.info("result : {}",result);
     }
 
 }
