@@ -54,4 +54,20 @@ public class CurringTest {
         Assertions.assertThat(composedB.apply(6)).isEqualTo(18);
 
     }
+    //book example 
+    BiFunction<String, String, String> biFunctionConcat = (a, b) -> a + " - "+ b;
+    Function<String, Function<String, String>> curryConcat = (a) -> (b) -> biFunctionConcat.apply(a, b);
+    Function<String,String> intermediateFunction = curryConcat.apply("Cat");
+    
+    Function<Double, Function<Double, Double>> curryAdd = (a) -> (b) -> a * b;
+            
+    
+    @Test
+    public void curringBookTest(){
+        Assertions.assertThat(biFunctionConcat.apply("Cat", "Dog")).isEqualTo("Cat - Dog");
+        Assertions.assertThat(curryConcat.apply("Cat").apply("Dog")).isEqualTo("Cat - Dog");
+        Assertions.assertThat(intermediateFunction.apply("Dog")).isEqualTo("Cat - Dog");
+        
+        Assertions.assertThat(curryAdd.apply(3.0).apply(4.0)).isEqualTo(12);
+    }
 }
