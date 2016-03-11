@@ -67,6 +67,14 @@ public class FilesTest {
     return mapFileLines;
     }
 
+    private static long calculateUniqueWords(String fileName) {
+        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+            return stream.flatMap(line -> Stream.of(line.split(" "))).distinct().count();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
 
     public static long countLines(File file) {
         try (Stream<String> lines = Files.lines(file.toPath(), Charset.defaultCharset())) {
