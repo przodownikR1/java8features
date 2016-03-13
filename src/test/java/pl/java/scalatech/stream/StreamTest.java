@@ -176,5 +176,22 @@ public class StreamTest extends DataPrepareTest {
         log.info("{}", Arrays.toString(sorted));
     }
     
+    
+    @Test
+    public void shouldPatternWork(){
+        Pattern.compile(" ").splitAsStream("slawek borowiec 36").forEach(System.out::print);
+    }
+    
+    @Test
+    public void charsTest(){
+        final String str = "przodownik";
+        str.chars().forEach(ch -> System.out.println((char)ch));
+        str.chars().forEach(StreamTest::printChar);
+        str.chars().mapToObj(ch -> Character.valueOf((char)ch)).forEach(System.out::print);
+    }
 
+    private static void printChar(int aChar) {
+        System.out.println((char)(aChar));
+        }
+    
 }
