@@ -82,10 +82,18 @@ dependencies {
     compile 'commons-lang:commons-lang:2.6'
     runtime("ch.qos.logback:logback-classic:$logbackVersion")
     compile("ch.qos.logback:logback-core:$logbackVersion")
+    
+    
+    compile "io.javaslang:javaslang:2.0.1"
+    
+    
     testCompile("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testCompile("org.mockito:mockito-all:$mockitoVersion")
     compile("junit:junit:$junitVersion")
     testCompile("org.easytesting:fest-assert:${festAssertVersion}")
+    
+  
+  
     compile'com.google.code.gson:gson:2.3.1'
     testCompile 'com.carrotsearch:junit-benchmarks:0.7.2'
     testCompile 'org.databene:contiperf:2.3.4'
