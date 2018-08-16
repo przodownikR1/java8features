@@ -7,19 +7,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @Builder
-@Slf4j
 @Getter
 public class Item {
-  private final String name;
-  private final int quantity;
-  private final BigDecimal price;
-  
- 
- 
+    private final String name;
+    private final int quantity;
+    private final BigDecimal price;
+
 }

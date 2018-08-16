@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,9 +17,11 @@ import com.google.common.base.Charsets;
 import com.google.common.io.CharSink;
 import com.google.common.io.Files;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 public class FileOperationTest {
-    //private FileWriter fileWriter = new FileWriter();
+    // private FileWriter fileWriter = new FileWriter();
     private File output;
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();

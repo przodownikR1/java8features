@@ -8,13 +8,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-
-
 public class ReusingStreamTest {
-    
+
     @Rule
     public ExpectedException exception = ExpectedException.none();
-    
+
     @Test
     public void shouldReusingStreamAgainTest() {
         Supplier<Stream<String>> streamSupplier = () -> Stream.of("d2", "a2", "b1", "b3", "c").filter(s -> s.startsWith("a"));
@@ -23,16 +21,15 @@ public class ReusingStreamTest {
         streamSupplier.get().noneMatch(s -> true);  // ok
 
     }
-    
-   @Test    
-    public void shouldThrowException(){
-        Stream<String> stream =
-                Stream.of("d2", "a2", "b1", "b3", "c")
-                    .filter(s -> s.startsWith("a"));
-            exception.expect(IllegalStateException.class);
-            exception.expectMessage("stream has already been operated upon or closed");
-            stream.anyMatch(s -> true);    // ok
-            stream.noneMatch(s -> true);   // exception
+
+    @Test
+    public void shouldThrowException() {
+        Stream<String> stream = Stream.of("d2", "a2", "b1", "b3", "c")
+                .filter(s -> s.startsWith("a"));
+        exception.expect(IllegalStateException.class);
+        exception.expectMessage("stream has already been operated upon or closed");
+        stream.anyMatch(s -> true);    // ok
+        stream.noneMatch(s -> true);   // exception
 
     }
 }

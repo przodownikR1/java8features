@@ -25,8 +25,8 @@ public class FunctionTest {
         Function<String, String> s = x -> x + " " + x;
         Function<Integer, Integer> foo = x -> x + 1;
 
-        Assertions.assertThat(foo.apply(10)).isEqualTo(11);
-        Assertions.assertThat(s.apply("home")).isEqualTo("home home");
+        assertThat(foo.apply(10)).isEqualTo(11);
+        assertThat(s.apply("home")).isEqualTo("home home");
 
     }
 
@@ -36,11 +36,11 @@ public class FunctionTest {
         UnaryOperator<Integer> operator = v -> v * 2;
         // the same as below
         Function<Integer, Integer> function = v -> v * 2;
-        Assertions.assertThat(function.apply(2)).isEqualTo(operator.apply(2));
+        assertThat(function.apply(2)).isEqualTo(operator.apply(2));
 
         List<Integer> list = Lists.newArrayList(1, 2, 3);
         list.replaceAll(element -> element + 2);
-        Assertions.assertThat(list).isEqualTo(Lists.newArrayList(3, 4, 5));
+        assertThat(list).isEqualTo(Lists.newArrayList(3, 4, 5));
 
     }
 
@@ -82,7 +82,7 @@ public class FunctionTest {
     @Test
     public void shouldSimpleFunctionWork() {
         final Function<Integer, String> fun = t -> "result is  " + t;
-        String result = CharMatcher.WHITESPACE.trimAndCollapseFrom(fun.apply(1), ' ');
+        String result = CharMatcher.breakingWhitespace().trimAndCollapseFrom(fun.apply(1), ' ');
         assertThat(result).isEqualTo("result is 1");
     }
 
@@ -91,36 +91,35 @@ public class FunctionTest {
         final Supplier<Integer> answer = () -> 10;
         assertThat(answer.get()).isEqualTo(10);
     }
-   @Test
+
+    @Test
     public void simpleBiFunctionTest() {
-       BiFunction<Integer, Integer,Integer > addInteger = (a,b)  -> a +b ;
-       assertThat(addInteger.apply(3, 7)).isEqualTo(10);
-       UnaryOperator<Integer> next = x -> x+2;
-       assertThat(next.apply(3)).isEqualTo(5);
-       assertThat(addInteger.andThen(next).apply(3, 2)).isEqualTo(7);
+        BiFunction<Integer, Integer, Integer> addInteger = (a, b) -> a + b;
+        assertThat(addInteger.apply(3, 7)).isEqualTo(10);
+        UnaryOperator<Integer> next = x -> x + 2;
+        assertThat(next.apply(3)).isEqualTo(5);
+        assertThat(addInteger.andThen(next).apply(3, 2)).isEqualTo(7);
 
-       BiFunction<String, String, String> concat = (a,b) -> a + b;
-       log.info("{}",concat.apply("Hello ", "slawek"));
-
+        BiFunction<String, String, String> concat = (a, b) -> a + b;
+        log.info("{}", concat.apply("Hello ", "slawek"));
 
     }
-   @Test
-   public void testFunctionConcatMethod() {
-          stringCounter(x->  x +" : " + x.length(),Lists.newArrayList("Slawek","kalina","jola"));
-   }
 
-   public static void stringCounter(Function<String, String> greeter,List<String> list) {
-       for(String name : list) {
-       log.info("{}",greeter.apply(name));
-       }
-       }
+    @Test
+    public void testFunctionConcatMethod() {
+        stringCounter(x -> x + " : " + x.length(), Lists.newArrayList("Slawek", "kalina", "jola"));
+    }
+
+    public static void stringCounter(Function<String, String> greeter, List<String> list) {
+        for (String name : list) {
+            log.info("{}", greeter.apply(name));
+        }
+    }
 
     @Test
     public void simpleFunctionTest() {
-        Function<String, String > add = x ->  "Hello " +x ;
+        Function<String, String> add = x -> "Hello " + x;
         assertThat(add.apply("slawek")).isEqualTo("Hello slawek");
-
-
 
     }
 

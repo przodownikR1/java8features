@@ -3,18 +3,17 @@ package pl.java.scalatech.lambda;
 import java.util.List;
 import java.util.Optional;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.fest.assertions.Assertions;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author przodownik
- * Module name :    java8features
- * Creating time :  14 maj 2014
+ *         Module name : java8features
+ *         Creating time : 14 maj 2014
  */
 @Slf4j
 public class PredicatesTest {

@@ -27,10 +27,7 @@ public class CheckedExceptionTest {
                     } catch (IllegalArgumentException | IllegalAccessException ex) {
                         throw new RuntimeException(ex);
                     }
-                }
-        );
+                });
     }
 
 }
-
-

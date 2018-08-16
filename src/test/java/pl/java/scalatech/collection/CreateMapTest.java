@@ -13,25 +13,25 @@ import lombok.extern.slf4j.Slf4j;
 import pl.java.scalatech.common.DataPrepareTest;
 import pl.java.scalatech.pojo.Person;
 import pl.java.scalatech.timeTest.TimedTest;
+
 @Slf4j
-public class CreateMapTest  extends DataPrepareTest 
-{
+public class CreateMapTest extends DataPrepareTest {
 
     @Rule
     public TimedTest timeTest = new TimedTest();
+
     @Test
-    public void shouldCreateMapLoginSalary(){
-        Function<Person,BigDecimal> funSalary = p->p.getSalary();
-        Function<Person,String> funLogin = p->p.getLogin();
-        Map<String,BigDecimal> result = persons.stream().collect(Collectors.toMap(funLogin,funSalary));
-        log.info(" {}",result);
+    public void shouldCreateMapLoginSalary() {
+        Function<Person, BigDecimal> funSalary = p -> p.getSalary();
+        Function<Person, String> funLogin = p -> p.getLogin();
+        Map<String, BigDecimal> result = persons.stream().collect(Collectors.toMap(funLogin, funSalary));
+        log.info(" {}", result);
     }
+
     @Test
-    public void shouldSort(){
+    public void shouldSort() {
         List<Person> result = persons.stream().sorted((o1, o2) -> o1.getSalary().compareTo(o2.getSalary())).collect(Collectors.toList());
-        log.info("{}",result);
+        log.info("{}", result);
     }
-    
-    
-    
+
 }

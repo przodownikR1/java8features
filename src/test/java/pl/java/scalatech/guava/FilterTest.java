@@ -3,13 +3,9 @@ package pl.java.scalatech.guava;
 import java.math.BigDecimal;
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
-
-import pl.java.scalatech.guava.Customer.Status;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -18,26 +14,22 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import lombok.extern.slf4j.Slf4j;
+import pl.java.scalatech.guava.Customer.Status;
+
 @Slf4j
 public class FilterTest {
 
     List<Customer> customers = Lists.newArrayList();
-    final Predicate<Customer> HIGH_SALARY = new Predicate<Customer>() {
-
-        @Override
-        public boolean apply(Customer input) {
-            if (input.getSalary().intValue() > 121) { return true; }
-            return false;
-
+    final Predicate<Customer> HIGH_SALARY = input -> {
+        if (input.getSalary().intValue() > 121) {
+            return true;
         }
+        return false;
+
     };
 
-    final Function<Customer, Worker> WORKER_PRODUCERS = new Function<Customer, Worker>() {
-        @Override
-        public Worker apply(Customer input) {
-            return new Worker(input.getFirstName() + " " + input.getLastName());
-        }
-    };
+    final Function<Customer, Worker> WORKER_PRODUCERS = input -> new Worker(input.getFirstName() + " " + input.getLastName());
 
     @Before
     public void init() {
@@ -51,12 +43,7 @@ public class FilterTest {
 
     @Test
     public void shouldFilterTest() {
-        Iterable<Customer> busyCustomers = Iterables.filter(customers, new Predicate<Customer>() {
-            @Override
-            public boolean apply(Customer customer) {
-                return Customer.Status.BUSY.equals(customer.getStatus());
-            }
-        });
+        Iterable<Customer> busyCustomers = Iterables.filter(customers, customer -> Customer.Status.BUSY.equals(customer.getStatus()));
         log.info(Joiner.on("\n").join(busyCustomers));
     }
 

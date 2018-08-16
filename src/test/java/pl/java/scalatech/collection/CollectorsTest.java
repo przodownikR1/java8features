@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.StrictAssertions;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,18 +50,18 @@ public class CollectorsTest extends DataPrepareTest {
     public void shouldsummarizeBigDecimal() {
         BigDecimal sum1 = persons.stream().reduce(BigDecimal.ZERO, (bd, item) -> bd.add(item.getSalary()), BigDecimal::add);
         BigDecimal sum2 = persons.stream().filter(Objects::nonNull).map(Person::getSalary).reduce(BigDecimal.ZERO, BigDecimal::add);
-        Assertions.assertThat(sum1).isEqualByComparingTo(valueOf(54));
-        Assertions.assertThat(sum2).isEqualByComparingTo(valueOf(54));
-        BigDecimal sum3 = persons.stream().collect(Collectors.reducing(BigDecimal.ZERO,Person::getSalary,BigDecimal::add));
-        Assertions.assertThat(sum3).isEqualByComparingTo(valueOf(54));
+        StrictAssertions.assertThat(sum1).isEqualByComparingTo(valueOf(54));
+        StrictAssertions.assertThat(sum2).isEqualByComparingTo(valueOf(54));
+        BigDecimal sum3 = persons.stream().collect(Collectors.reducing(BigDecimal.ZERO, Person::getSalary, BigDecimal::add));
+        StrictAssertions.assertThat(sum3).isEqualByComparingTo(valueOf(54));
         Optional<BigDecimal> result = persons.stream().map(Person::getSalary).reduce(BigDecimal::add);
-        Assertions.assertThat(result.get()).isEqualByComparingTo(valueOf(54));
-        
+        StrictAssertions.assertThat(result.get()).isEqualByComparingTo(valueOf(54));
 
     }
+
     @Test
-    public void shouldJoinStrings(){
-        log.info("joins {}",persons.stream().map(Person::getLogin).collect(Collectors.joining(" ")));
-        
+    public void shouldJoinStrings() {
+        log.info("joins {}", persons.stream().map(Person::getLogin).collect(Collectors.joining(" ")));
+
     }
 }

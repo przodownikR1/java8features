@@ -38,27 +38,27 @@ public class PerfJsonTest {
     public void ordinaryLoop() {
 
         for (int i = 0; i < 100; i++) {
-          compute(i);
+            compute(i);
         }
 
     }
+
     @Test
     @PerfTest(invocations = 50, threads = 5)
     public void newLoop() {
 
-        IntStream.range(0, 100).forEach(l->compute(l));
+        IntStream.range(0, 100).forEach(l -> compute(l));
     }
 
     @Test
     @PerfTest(invocations = 50, threads = 5)
     public void newParallelLoop() {
 
-        IntStream.range(0, 100).parallel().forEach(l->compute(l));
+        IntStream.range(0, 100).parallel().forEach(l -> compute(l));
     }
 
-
     @SneakyThrows
-    private void compute(int i ) {
+    private void compute(int i) {
         Thread.sleep(5);
     }
 

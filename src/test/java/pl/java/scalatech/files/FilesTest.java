@@ -39,32 +39,30 @@ public class FilesTest {
         log.info("lines  : {}", countLines(file.toFile()));
 
     }
+
     @Test
-    public void second(){
+    public void second() {
         Path file = Paths.get("/home/przodownik/logs/");
-        
-        log.info("{}",getlines(file, f -> f.toString().endsWith(".log")));
-        
-        
-        log.info("maps {} ",returnFileWithLineCount(file, f -> f.toString().endsWith(".log")));
+
+        log.info("{}", getlines(file, f -> f.toString().endsWith(".log")));
+
+        log.info("maps {} ", returnFileWithLineCount(file, f -> f.toString().endsWith(".log")));
     }
-    
+
     @SneakyThrows
-    public List<Long> getlines(Path path , Predicate<Path> predicate) {
+    public List<Long> getlines(Path path, Predicate<Path> predicate) {
         List<Long> linesCounts = Files.list(path).filter(predicate).map(f -> lines(f).count())
                 .collect(Collectors.toList());
         return linesCounts;
     }
-    
-    
-    
+
     @SneakyThrows
-    public Map<Path,Long> returnFileWithLineCount(Path path,Predicate<Path> predicate){    
-    Map<Path, Long> mapFileLines = Files.list(path)
-            .filter(predicate)
-            .collect(Collectors.toMap(
-                    Function.identity(), f -> lines(f).count()));
-    return mapFileLines;
+    public Map<Path, Long> returnFileWithLineCount(Path path, Predicate<Path> predicate) {
+        Map<Path, Long> mapFileLines = Files.list(path)
+                .filter(predicate)
+                .collect(Collectors.toMap(
+                        Function.identity(), f -> lines(f).count()));
+        return mapFileLines;
     }
 
     private static long calculateUniqueWords(String fileName) {
@@ -74,7 +72,6 @@ public class FilesTest {
             throw new RuntimeException(e);
         }
     }
-    
 
     public static long countLines(File file) {
         try (Stream<String> lines = Files.lines(file.toPath(), Charset.defaultCharset())) {
@@ -95,9 +92,7 @@ public class FilesTest {
     @SneakyThrows
     public void shouldFilesFind() {
         Path start = FileSystems.getDefault().getPath("/home/przodownik/blog/java8features/src/main");
-        Stream<Path> stream = Files.find(start, 10, (path, atrrs) -> (
-
-        path.endsWith(".java")));
+        Stream<Path> stream = Files.find(start, 10, (path, atrrs) -> path.endsWith(".java"));
         stream.forEach(l -> log.info("{}", l.getFileName()));
     }
 
@@ -123,9 +118,10 @@ public class FilesTest {
             ).forEach(p -> log.info("find : {}", p));
         }
     }
+
     @SneakyThrows
     @Test
-    public void walkByCurrentPAth(){
+    public void walkByCurrentPAth() {
         Path file = Paths.get("/home/przodownik/logs/");
         try (Stream<Path> files = Files.walk(file)) {
             log.info("{} ", files.mapToLong((path) -> {
@@ -137,17 +133,18 @@ public class FilesTest {
             }).summaryStatistics());
         }
     }
-    
+
     @Test
-    public void shouldWordCount(){
+    public void shouldWordCount() {
         wordCount();
     }
+
     @SneakyThrows
-    public void wordCount(){
+    public void wordCount() {
         Path file = Paths.get("/home/przodownik/logs/springWebjavaCamp.log");
         Map<String, Long> counts = Files.lines(file)
                 .flatMap(line -> Stream.of(line.split("\\s+"))).collect(Collectors.groupingBy(value -> value, Collectors.counting()));
-        log.info("{}",counts);
+        log.info("{}", counts);
     }
-    
+
 }

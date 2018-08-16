@@ -2,13 +2,13 @@ package pl.java.scalatech.timeTest;
 
 import java.util.concurrent.TimeUnit;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 import com.google.common.base.Stopwatch;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class TimedTest implements MethodRule {
@@ -40,8 +40,9 @@ public class TimedTest implements MethodRule {
             final Timed timed = method.getAnnotation(Timed.class);
 
             if (timed != null) {
-                if (took > timed.timeThreshold()) { throw new AssertionError("method :" + method + " took too long :  " + took
-                        + ",  should took only less than : " + timed.timeThreshold());
+                if (took > timed.timeThreshold()) {
+                    throw new AssertionError("method :" + method + " took too long :  " + took
+                            + ",  should took only less than : " + timed.timeThreshold());
 
                 }
 

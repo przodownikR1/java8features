@@ -5,10 +5,9 @@ import static org.fest.assertions.Assertions.assertThat;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Test;
 
+import lombok.extern.slf4j.Slf4j;
 import pl.java.scalatech.functional.Action;
 
 @Slf4j

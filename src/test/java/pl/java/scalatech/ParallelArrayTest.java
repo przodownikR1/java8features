@@ -15,10 +15,10 @@ public class ParallelArrayTest {
 
         Arrays.parallelSetAll(arrayOfLong, index -> ThreadLocalRandom.current().nextInt(1000));
         Arrays.stream(arrayOfLong).limit(10).forEach(i -> log.info("{}", i));
-        log.info("+++  {}",Arrays.toString(arrayOfLong));
+        log.info("+++  {}", Arrays.toString(arrayOfLong));
         log.info("++++ sort");
         Arrays.parallelSort(arrayOfLong);
-        log.info("+++  {}",Arrays.toString(arrayOfLong));
+        log.info("+++  {}", Arrays.toString(arrayOfLong));
         Arrays.stream(arrayOfLong).limit(10).forEach(i -> log.info("{}", i));
 
     }

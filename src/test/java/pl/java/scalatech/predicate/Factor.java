@@ -14,5 +14,5 @@ public class Factor {
     private long id;
     private String name;
     private Process state;
-    
+
 }

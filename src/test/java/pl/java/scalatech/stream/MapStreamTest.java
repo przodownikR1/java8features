@@ -12,26 +12,27 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.StrictAssertions;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
 import pl.java.scalatech.common.DataPrepareTest;
 import pl.java.scalatech.pojo.Person;
+
 @Slf4j
-public class MapStreamTest extends DataPrepareTest{
+public class MapStreamTest extends DataPrepareTest {
     @Test
-    public void shouldRetriveOnlyNames(){
-       
+    public void shouldRetriveOnlyNames() {
+
         persons.remove(0);
-        Map<Object,Object> personNames = persons.stream().collect(Collectors.toMap(Person::getLogin,Function.identity())); //(p)->p = identity
-        
+        Map<Object, Object> personNames = persons.stream().collect(Collectors.toMap(Person::getLogin, Function.identity())); // (p)->p = identity
+
         Map<BigDecimal, String> collect = persons.stream().collect(Collectors.toMap(Person::getSalary, Person::getLogin));
-        log.info("{}",collect);
-        log.info("{}",personNames);
-        
+        log.info("{}", collect);
+        log.info("{}", personNames);
+
     }
-    
+
     @Test
     public void map2() {
         Stream<Locale> locales = Stream.of(Locale.getAvailableLocales());
@@ -41,17 +42,13 @@ public class MapStreamTest extends DataPrepareTest{
                         (Locale l) -> l.getDisplayLanguage(l),
                         (existingValue, newValue) -> existingValue));
 
-       log.info("{}",result);
+        log.info("{}", result);
     }
 
     @Test
     public void intStreamTest() {
         List<Integer> result = range(0, 10).boxed().collect(toCollection(ArrayList<Integer>::new));
-        Assertions.assertThat(result.size()).isEqualTo(10);
+        StrictAssertions.assertThat(result.size()).isEqualTo(10);
     }
-    
-    
-    
- 
-    
+
 }

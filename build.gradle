@@ -16,19 +16,14 @@ targetCompatibility = 1.8
 
 
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.4'
-     
-    }
-    
+    repositories { jcenter() }
+    dependencies { classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.4' }
+
 }
 apply plugin: 'info.solidsoft.pitest'
 
 pitest {
-   enableDefaultIncrementalAnalysis = true
+    enableDefaultIncrementalAnalysis = true
     targetClasses = ['pl.java.scalatech.pit*']
     pitestVersion = "1.1.4"
     threads = 8
@@ -70,11 +65,11 @@ sourceSets {
 }
 
 dependencies {
-    
+
     compile 'io.reactivex:rxjava:1.1.0'
     compile ("org.codehaus.groovy:groovy:${groovyVersion}")
     compile("org.projectlombok:lombok:${lombokVersion}")
-    compile("com.google.guava:guava:${guavaVersion}")    
+    compile("com.google.guava:guava:${guavaVersion}")
     compile ("org.springframework:spring-core:${springVersion}")
     compile ("org.springframework:spring-beans:${springVersion}")
     compile ("org.springframework:spring-context:${springVersion}")
@@ -82,28 +77,24 @@ dependencies {
     compile 'commons-lang:commons-lang:2.6'
     runtime("ch.qos.logback:logback-classic:$logbackVersion")
     compile("ch.qos.logback:logback-core:$logbackVersion")
-    
-    
-    compile "io.javaslang:javaslang:2.0.1"
-    
-    
+
     testCompile("org.hamcrest:hamcrest-all:$hamcrestVersion")
     testCompile("org.mockito:mockito-all:$mockitoVersion")
     compile("junit:junit:$junitVersion")
     testCompile("org.easytesting:fest-assert:${festAssertVersion}")
-    
-  
-  
+
     compile'com.google.code.gson:gson:2.3.1'
     testCompile 'com.carrotsearch:junit-benchmarks:0.7.2'
     testCompile 'org.databene:contiperf:2.3.4'
     testCompile 'org.assertj:assertj-core:3.1.0'
     testCompile 'com.jayway.awaitility:awaitility-java8:1.6.1'
     testCompile 'org.assertj:assertj-core:3.1.0'
-    testCompile 'com.jayway.awaitility:awaitility-java8:1.6.1' 
+    testCompile 'com.jayway.awaitility:awaitility-java8:1.6.1'
     compile 'org.fusesource.jansi:jansi:1.11'
-    compile 'com.google.guava:guava:18.+'
-   
+    compile "io.vavr:vavr:${vavrVersion}"
+    compile "io.vavr:vavr-match:${vavrVersion}"
+
+
 }
 
 //configurations {
@@ -133,7 +124,3 @@ jar {
     }
 }
 
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
-}

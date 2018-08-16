@@ -2,16 +2,15 @@ package pl.java.scalatech.perf;
 
 import java.math.BigDecimal;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 
-import pl.java.scalatech.guava.Customer;
-
 import com.google.gson.Gson;
+
+import lombok.extern.slf4j.Slf4j;
+import pl.java.scalatech.guava.Customer;
 
 @Slf4j
 public class StopwatchRuleTest {

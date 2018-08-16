@@ -9,8 +9,10 @@ import pl.java.scalatech.guava.Customer.Status;
 @Slf4j
 public class CustomerBusyConsumer implements Consumer<Customer> {
     public static final CustomerBusyConsumer INSTANCE = new CustomerBusyConsumer();
+
     private CustomerBusyConsumer() {
     }
+
     @Override
     public void accept(Customer customer) {
         customer.setStatus(Status.BUSY);

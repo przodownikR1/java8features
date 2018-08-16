@@ -4,13 +4,13 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.concurrent.ForkJoinPool;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
 
 import com.carrotsearch.junitbenchmarks.BenchmarkRule;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SimpleTest {
@@ -26,7 +26,7 @@ public class SimpleTest {
 
     @Test
     public void shouldListHiddenFiles() {
-        File[] hiddenFiles = new File("/home/przodownik").listFiles(File::isHidden); //method reference
+        File[] hiddenFiles = new File("/home/przodownik").listFiles(File::isHidden); // method reference
         log.info("+++ {}", Arrays.toString(hiddenFiles));
     }
 

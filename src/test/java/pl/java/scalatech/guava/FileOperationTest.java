@@ -5,8 +5,6 @@ import static org.fest.assertions.Assertions.assertThat;
 import java.io.File;
 import java.io.IOException;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,6 +13,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class FileOperationTest {

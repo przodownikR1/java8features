@@ -3,9 +3,9 @@ package pl.java.scalatech.formatter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Test;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class BigDecimalTest {

@@ -10,16 +10,17 @@ import lombok.extern.slf4j.Slf4j;
 import pl.java.scalatech.common.DataPrepareTest;
 
 @Slf4j
-public class RetFunctionTest extends DataPrepareTest{
+public class RetFunctionTest extends DataPrepareTest {
     int hoursWorked = 10;
+
     @Test
-    public void test2(){
-        Function<String,String> toLowerFunction= String::toLowerCase;
-        Consumer<String> consumer = s -> log.info("{}",toLowerFunction.apply(s));
+    public void test2() {
+        Function<String, String> toLowerFunction = String::toLowerCase;
+        Consumer<String> consumer = s -> log.info("{}", toLowerFunction.apply(s));
         names.forEach(consumer);
-        
+
     }
-    
+
     @Test
     public void test1() {
         log.info("{}", X.calculatePay(10, 15.75f, X.EmployeeType.Hourly));
@@ -36,7 +37,7 @@ public class RetFunctionTest extends DataPrepareTest{
             calculateFunction = (hours, payRate) -> hours * payRate + (hours - 40) * 1.5f * payRate;
         }
 
-        log.info("{}",calculateFunction.apply(hoursWorked, 15.57f));
+        log.info("{}", calculateFunction.apply(hoursWorked, 15.57f));
     }
 
 }

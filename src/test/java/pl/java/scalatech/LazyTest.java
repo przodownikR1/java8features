@@ -1,4 +1,5 @@
 package pl.java.scalatech;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class LazyTest {
 
         List<Integer> l1 = new ArrayList<>();
         for (int n : numbers) {
-            if (isEven(n)) l1.add(n);
+            if (isEven(n))
+                l1.add(n);
         }
 
         List<Integer> l2 = new ArrayList<>();
@@ -51,7 +53,8 @@ public class LazyTest {
 
         List<Integer> l3 = new ArrayList<>();
         for (int n : l2) {
-            if (isGreatThan5(n)) l3.add(n);
+            if (isGreatThan5(n))
+                l3.add(n);
         }
 
         log.info("imperative seq : {}", l3.get(0));

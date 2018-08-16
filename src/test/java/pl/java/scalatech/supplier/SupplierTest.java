@@ -1,12 +1,7 @@
 package pl.java.scalatech.supplier;
 
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-import java.util.function.IntSupplier;
-import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 import org.junit.Test;
@@ -17,11 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SupplierTest {
     @Test
     public void supplierExample() {
-        BooleanSupplier bs = () -> true;
-        IntSupplier is = () -> 2;
-        LongSupplier ls = System::currentTimeMillis;
         DoubleSupplier ds = Math::random;
-        Supplier<Map<String, String>> ms = TreeMap::new;
         log.info("ds {}", ds.getAsDouble());
     }
 
@@ -33,10 +24,11 @@ public class SupplierTest {
         }
         return number;
     };
+
     @Test
-    public void shouldGenerateNumberFrom0to9exclude3To8(){
-        for(int i =0 ;i < 10 ;i++){
-            log.info("{}",randomIntegers.get());
+    public void shouldGenerateNumberFrom0to9exclude3To8() {
+        for (int i = 0; i < 10; i++) {
+            log.info("{}", randomIntegers.get());
         }
     }
 }

@@ -16,18 +16,17 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+
+import lombok.extern.slf4j.Slf4j;
 import pl.java.scalatech.common.DataPrepareTest;
 import pl.java.scalatech.pojo.Person;
 import pl.java.scalatech.timeTest.Timed;
 import pl.java.scalatech.timeTest.TimedTest;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
 @Slf4j
 public class MapTest extends DataPrepareTest {
@@ -58,7 +57,7 @@ public class MapTest extends DataPrepareTest {
     private static List<Person> readAndConvertToPersonList(String pathName) throws IOException {
         List<Person> persons = null;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(pathName))))) {
-            //stream -> br.lines()
+            // stream -> br.lines()
             persons = br.lines().map(mapToPerson).collect(Collectors.toList());
         }
         return persons;
@@ -85,7 +84,7 @@ public class MapTest extends DataPrepareTest {
 
     @Test
     public void demonstrateDoubleSummaryStatisticsOnCollectionStream() {
-        //given
+        // given
         ImmutableMap<Integer, Double> sampler;
 
         Map<Integer, Double> temporary = Maps.newHashMap();
@@ -95,10 +94,10 @@ public class MapTest extends DataPrepareTest {
         temporary.put(4, 4.66);
         temporary.put(5, 7.54);
         sampler = ImmutableMap.copyOf(temporary);
-        //when
+        // when
         final DoubleSummaryStatistics doubleSummaryStatistics = sampler.values().stream()
                 .collect(DoubleSummaryStatistics::new, DoubleSummaryStatistics::accept, DoubleSummaryStatistics::combine);
-        //then
+        // then
         assertThat(doubleSummaryStatistics.getMax()).isEqualTo(7.54d);
         assertThat(doubleSummaryStatistics.getMin()).isEqualTo(1d);
         assertThat(doubleSummaryStatistics.getSum()).isEqualTo(18.6d);
@@ -109,11 +108,11 @@ public class MapTest extends DataPrepareTest {
 
     @Test
     public void shouldDoubleSummaryStatisticsOnDoubleStreamEvaluate() {
-        //given
+        // given
         DoubleStream ds = DoubleStream.builder().add(1.1).add(2.2).add(3.3).build();
-        //when
+        // when
         DoubleSummaryStatistics dsStatistics = ds.summaryStatistics();
-        //then
+        // then
         assertThat(dsStatistics.getMax()).isEqualTo(3.3d);
         assertThat(dsStatistics.getMin()).isEqualTo(1.1d);
         assertThat(dsStatistics.getSum()).isEqualTo(6.6d);
@@ -123,13 +122,13 @@ public class MapTest extends DataPrepareTest {
 
     @Test
     public void shouldLongSummaryStatisticsWork() {
-        //given
+        // given
         LongSummaryStatistics timeDurations = new LongSummaryStatistics();
-        //when
+        // when
         timeDurations.accept(50);
         timeDurations.accept(44);
         timeDurations.accept(4);
-        //then
+        // then
         assertThat(timeDurations.getMax()).isEqualTo(50);
         assertThat(timeDurations.getMin()).isEqualTo(4);
         assertThat(timeDurations.getSum()).isEqualTo(98);

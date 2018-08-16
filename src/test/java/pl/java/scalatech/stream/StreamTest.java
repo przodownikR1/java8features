@@ -1,10 +1,8 @@
 package pl.java.scalatech.stream;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.IntSupplier;
@@ -13,16 +11,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.fest.assertions.Assertions;
 import org.junit.Test;
 
-import pl.java.scalatech.common.DataPrepareTest;
-import pl.java.scalatech.pojo.Person;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
+import lombok.extern.slf4j.Slf4j;
+import pl.java.scalatech.common.DataPrepareTest;
+import pl.java.scalatech.pojo.Person;
 
 /**
  * @author Sławomir Borowiec
@@ -65,7 +62,7 @@ public class StreamTest extends DataPrepareTest {
     }
 
     private static List<String> filter(List<String> names, Predicate<String> condition) {
-        return names.stream().filter((name) -> (condition.apply(name))).collect(Collectors.toList());
+        return names.stream().filter((name) -> condition.apply(name)).collect(Collectors.toList());
 
     }
 
@@ -76,7 +73,7 @@ public class StreamTest extends DataPrepareTest {
 
         Arrays.parallelSetAll(ints, i -> random.nextInt(1000));
         // when
-        // Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort:  {}", i));
+        // Arrays.stream(ints).limit(10).forEach(i -> log.info("before sort: {}", i));
         int sumBefore = Arrays.stream(ints).limit(20).sum();
         Arrays.parallelSort(ints);
         // Arrays.stream(ints).limit(10).forEach(i -> log.info(" after sort : {}", i));
@@ -122,10 +119,10 @@ public class StreamTest extends DataPrepareTest {
 
             @Override
             public int getAsInt() {
-                int oldPrevious = this.previous;
-                int nextValue = this.previous + this.current;
-                this.previous = this.current;
-                this.current = nextValue;
+                int oldPrevious = previous;
+                int nextValue = previous + current;
+                previous = current;
+                current = nextValue;
                 return oldPrevious;
             }
         };
@@ -175,23 +172,22 @@ public class StreamTest extends DataPrepareTest {
         Assertions.assertThat(sorted).hasSize(5);
         log.info("{}", Arrays.toString(sorted));
     }
-    
-    
+
     @Test
-    public void shouldPatternWork(){
+    public void shouldPatternWork() {
         Pattern.compile(" ").splitAsStream("slawek borowiec 36").forEach(System.out::print);
     }
-    
+
     @Test
-    public void charsTest(){
+    public void charsTest() {
         final String str = "przodownik";
-        str.chars().forEach(ch -> System.out.println((char)ch));
+        str.chars().forEach(ch -> System.out.println((char) ch));
         str.chars().forEach(StreamTest::printChar);
-        str.chars().mapToObj(ch -> Character.valueOf((char)ch)).forEach(System.out::print);
+        str.chars().mapToObj(ch -> Character.valueOf((char) ch)).forEach(System.out::print);
     }
 
     private static void printChar(int aChar) {
-        System.out.println((char)(aChar));
-        }
-    
+        System.out.println((char) aChar);
+    }
+
 }

@@ -9,10 +9,10 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.fest.assertions.Assertions;
 import org.junit.Test;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Sławomir Borowiec

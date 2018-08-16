@@ -10,17 +10,17 @@ import org.junit.Test;
 import org.springframework.core.convert.converter.Converter;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 public class FileOper1 {
-       
+
     @Test
-    public void shouldConvertWork()
-    {
+    public void shouldConvertWork() {
         Converter<String, Integer> converter = Integer::valueOf;
         Integer converted = converter.convert("123");
-        log.info("+++ {}",converted);
+        log.info("+++ {}", converted);
     }
-    
+
     public int sumFile(final Path path) {
         try (Stream<String> lines = Files.lines(path)) {
             return lines.flatMap(Pattern.compile(",")::splitAsStream) //

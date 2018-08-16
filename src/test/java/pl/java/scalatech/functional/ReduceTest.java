@@ -11,22 +11,22 @@ import org.junit.Test;
 import pl.java.scalatech.common.DataPrepareTest;
 import pl.java.scalatech.pojo.Person;
 
-public class ReduceTest extends DataPrepareTest{
-    
-    private Integer[] l = new Integer[] {1,2,3,4,5};
-    
-    
+public class ReduceTest extends DataPrepareTest {
+
+    private Integer[] l = new Integer[] { 1, 2, 3, 4, 5 };
+
     @Test
     public void shouldSumByReduce() {
-     Integer result = Arrays.stream(l).reduce(0,(x,y)->x+y);
-     assertThat(result).isEqualTo(15);
-        
+        Integer result = Arrays.stream(l).reduce(0, (x, y) -> x + y);
+        assertThat(result).isEqualTo(15);
+
     }
+
     @Test
     public void shouldSumSalary() {
-        BigDecimal sum = persons.stream().filter(Objects::nonNull).filter(p -> p.getSalary() != null).map(Person::getSalary).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal sum = persons.stream().filter(Objects::nonNull).filter(p -> p.getSalary() != null).map(Person::getSalary).reduce(BigDecimal.ZERO,
+                BigDecimal::add);
         assertThat(sum).isEqualTo(new BigDecimal(54));
     }
-    
-    
+
 }

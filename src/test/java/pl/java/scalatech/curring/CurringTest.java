@@ -4,7 +4,7 @@ import java.util.function.BiFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.Function;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.StrictAssertions;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class CurringTest {
         Function<Integer, Function<Integer, Integer>> currier = a -> b -> adder.apply(a, b);
         log.info("currier {}", currier.apply(2).apply(3));
         Function<Integer, Integer> curried = currier.apply(4);
-        Assertions.assertThat(curried.apply(3)).isEqualTo(7);
+        StrictAssertions.assertThat(curried.apply(3)).isEqualTo(7);
 
     }
 
@@ -50,24 +50,24 @@ public class CurringTest {
 
         Function<Integer, Integer> composedB = times2.compose(add3);
 
-        Assertions.assertThat(composedA.apply(6)).isEqualTo(15);
-        Assertions.assertThat(composedB.apply(6)).isEqualTo(18);
+        StrictAssertions.assertThat(composedA.apply(6)).isEqualTo(15);
+        StrictAssertions.assertThat(composedB.apply(6)).isEqualTo(18);
 
     }
-    //book example 
-    BiFunction<String, String, String> biFunctionConcat = (a, b) -> a + " - "+ b;
+
+    // book example
+    BiFunction<String, String, String> biFunctionConcat = (a, b) -> a + " - " + b;
     Function<String, Function<String, String>> curryConcat = (a) -> (b) -> biFunctionConcat.apply(a, b);
-    Function<String,String> intermediateFunction = curryConcat.apply("Cat");
-    
+    Function<String, String> intermediateFunction = curryConcat.apply("Cat");
+
     Function<Double, Function<Double, Double>> curryAdd = (a) -> (b) -> a * b;
-            
-    
+
     @Test
-    public void curringBookTest(){
-        Assertions.assertThat(biFunctionConcat.apply("Cat", "Dog")).isEqualTo("Cat - Dog");
-        Assertions.assertThat(curryConcat.apply("Cat").apply("Dog")).isEqualTo("Cat - Dog");
-        Assertions.assertThat(intermediateFunction.apply("Dog")).isEqualTo("Cat - Dog");
-        
-        Assertions.assertThat(curryAdd.apply(3.0).apply(4.0)).isEqualTo(12);
+    public void curringBookTest() {
+        StrictAssertions.assertThat(biFunctionConcat.apply("Cat", "Dog")).isEqualTo("Cat - Dog");
+        StrictAssertions.assertThat(curryConcat.apply("Cat").apply("Dog")).isEqualTo("Cat - Dog");
+        StrictAssertions.assertThat(intermediateFunction.apply("Dog")).isEqualTo("Cat - Dog");
+
+        StrictAssertions.assertThat(curryAdd.apply(3.0).apply(4.0)).isEqualTo(12);
     }
 }

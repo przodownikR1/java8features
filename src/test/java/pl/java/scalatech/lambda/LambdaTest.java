@@ -3,10 +3,7 @@ package pl.java.scalatech.lambda;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
-
-import lombok.extern.slf4j.Slf4j;
 
 import org.fest.assertions.Assertions;
 import org.junit.Ignore;
@@ -17,6 +14,8 @@ import org.junit.rules.TestRule;
 import com.carrotsearch.junitbenchmarks.BenchmarkRule;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author przodownik
@@ -67,12 +66,9 @@ public class LambdaTest {
 
     @Test
     public void shouldItegateListOfIntegerJava8Way() {
-        values.forEach(new Consumer<Integer>() {
-            @Override
-            public void accept(Integer t) {
-                log.info(" java 8 forEach   :    {}", t);
-                total += t;
-            }
+        values.forEach(t -> {
+            log.info(" java 8 forEach   :    {}", t);
+            total += t;
         });
         log.info("total   : {}  ", total);
     }

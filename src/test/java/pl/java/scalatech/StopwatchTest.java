@@ -1,12 +1,12 @@
 package pl.java.scalatech;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.AssumptionViolatedException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class StopwatchTest {

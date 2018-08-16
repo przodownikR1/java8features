@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-class InnerContent{
+class InnerContent {
     private int count;
-    private  int totalCount;
-    private  Set<Integer> relatedIds = newHashSet();
+    private int totalCount;
+    private Set<Integer> relatedIds = newHashSet();
 
 }

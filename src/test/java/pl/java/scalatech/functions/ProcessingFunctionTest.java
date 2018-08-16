@@ -8,9 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import org.fest.assertions.Assertions;
 import org.junit.Test;
@@ -27,12 +24,7 @@ public class ProcessingFunctionTest extends DataPrepareTest {
     Function<String, String> up = t -> t.toUpperCase();
     Function<String, String> result = low.andThen(up);
 
-    static BiFunction<String, Integer, String> cut = new BiFunction<String, Integer, String>() {
-        @Override
-        public String apply(String t, Integer u) {
-            return t.substring(0, u);
-        }
-    };
+    static BiFunction<String, Integer, String> cut = (t, u) -> t.substring(0, u);
     List<String> numberString = Lists.newArrayList("34", "3", "5", "11");
     List<Integer> numbers = new ArrayList<>();
     Function<List<String>, List<Integer>> singleFunction = s -> {

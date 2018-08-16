@@ -13,14 +13,16 @@ public class JIAComputeIfAbstentTest {
 
     Integer computeNumberOfNodesUsingCacheOld(Range range) {
         Integer result = numberOfNodes.get(range);
-        if (result != null) { return result; }
+        if (result != null) {
+            return result;
+        }
         result = computeNumberOfNodes(range);
         numberOfNodes.put(range, result);
         return result;
     }
 
     private Integer computeNumberOfNodes(Range range) {
-        //TODO
+        // TODO
         return 1;
     }
 

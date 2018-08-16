@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ComputeIsAbsentTest {
@@ -53,7 +53,7 @@ public class ComputeIsAbsentTest {
         intMap.put(1, "Value1");
         intMap.put(2, "Value2");
         intMap.computeIfAbsent(3, e -> "" + "Value".length());
-        intMap.computeIfAbsent(3, e -> "" + "Value1".length());//ommit
+        intMap.computeIfAbsent(3, e -> "" + "Value1".length());// ommit
         intMap.computeIfAbsent(5, e -> "" + "Value1".length());
         intMap.keySet().stream().forEach(s -> log.info("compute {} {}", s, intMap.get(s)));
     }
@@ -79,7 +79,11 @@ public class ComputeIsAbsentTest {
 
         log.info("key 3 value:'{}'", map.get(3));
 
-        log.info("map computeIfPresent:'{}'", map.computeIfPresent(9, (num, val) -> null));
+        log.info("map computeIfPresent:'{}'", map.computeIfPresent(9, (num, val) -> {
+            System.err.println("num : " + num);
+            System.err.println("val : " + val);
+            return "new value";
+        }));
 
         log.info("key 9 containsKey:'{}'", map.containsKey(9));
 

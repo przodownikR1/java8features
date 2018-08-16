@@ -3,14 +3,13 @@ package pl.java.scalatech.collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Test;
-
-import pl.java.scalatech.common.DataPrepareTest;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+
+import lombok.extern.slf4j.Slf4j;
+import pl.java.scalatech.common.DataPrepareTest;
 
 @Slf4j
 public class OrDefaultTest extends DataPrepareTest {
@@ -19,7 +18,7 @@ public class OrDefaultTest extends DataPrepareTest {
         Map<String, Long> map = new HashMap<>();
         for (String s : names) {
             Long count = map.get(s);
-            map.put(s, (count == null) ? 1L : count + 1);
+            map.put(s, count == null ? 1L : count + 1);
         }
         log.info("{}", map);
     }

@@ -33,7 +33,7 @@ public class PerformanceStreamTest {
         Stopwatch sw = Stopwatch.createStarted();
 
         Stream<Long> stream = Stream.generate(() -> ThreadLocalRandom.current().nextLong());
-        List<Long> list = stream.limit(10_000_000).collect(Collectors.toList());
+        stream.limit(10_000_000).collect(Collectors.toList());
         sw.stop();
         log.info("+++ parallelTest2  {}", sw.elapsed(TimeUnit.MILLISECONDS));
 
@@ -44,12 +44,10 @@ public class PerformanceStreamTest {
         Stopwatch sw = Stopwatch.createStarted();
 
         Stream<Long> stream = ThreadLocalRandom.current().longs(10_000_000).mapToObj(Long::new);
-        List<Long> list = stream.collect(Collectors.toList());
+        stream.collect(Collectors.toList());
         sw.stop();
         log.info("+++ parallelTest3  {}", sw.elapsed(TimeUnit.MILLISECONDS));
 
     }
-
-
 
 }

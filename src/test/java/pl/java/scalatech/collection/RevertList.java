@@ -16,10 +16,9 @@ public class RevertList {
     @Test
     public void convert() {
         List<String> s = Lists.newArrayList("slawek", "bak", "kalina");
-        s.stream().collect(Collectors.toCollection(LinkedList::new)).descendingIterator().forEachRemaining(l->log.info("{}",l));
+        s.stream().collect(Collectors.toCollection(LinkedList::new)).descendingIterator().forEachRemaining(l -> log.info("{}", l));
         Iterator<String> result = s.stream().collect(Collectors.toCollection(LinkedList::new)).descendingIterator();
         log.info("{}", Lists.newArrayList(result));
-        
 
     }
 }

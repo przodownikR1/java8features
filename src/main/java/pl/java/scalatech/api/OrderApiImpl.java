@@ -3,14 +3,13 @@ package pl.java.scalatech.api;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 public class OrderApiImpl implements OrderApi {
 
-    
-
     @Override
     public Cart buy(List<Item> items) {
-        log.info("buy...."); 
+        log.info("buy....");
         return Cart.builder().items(items).build();
     }
 

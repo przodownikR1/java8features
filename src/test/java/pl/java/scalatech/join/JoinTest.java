@@ -11,14 +11,13 @@ import java.util.StringJoiner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.StrictAssertions;
 import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 
 import pl.java.scalatech.timeTest.TimedTest;
-
 
 public class JoinTest {
     private final static String[] strs = { "yamaha", "kawa", "honda", "suka" };
@@ -53,34 +52,34 @@ public class JoinTest {
     public void shouldOmmitNull() {
         List<String> names = Lists.newArrayList("slawek", "tata", null, "bak");
         String joined = names.stream().filter(l -> l != null).collect(Collectors.joining(", "));
-        Assertions.assertThat(joined).isEqualTo("slawek, tata, bak");
+        StrictAssertions.assertThat(joined).isEqualTo("slawek, tata, bak");
     }
 
     @Test
     public void shouldOmmitSecondNull() {
         List<String> names = Lists.newArrayList("slawek", "tata", null, "bak");
         String joined = names.stream().filter(Objects::nonNull).collect(Collectors.joining(", "));
-        Assertions.assertThat(joined).isEqualTo("slawek, tata, bak");
+        StrictAssertions.assertThat(joined).isEqualTo("slawek, tata, bak");
     }
 
     @Test
     public void shouldCharsWorks() {
         String result = "foobar:foo:bar".chars().distinct().mapToObj(c -> String.valueOf((char) c)).sorted().collect(joining());
-        Assertions.assertThat(result).isEqualTo("abfor");
+        StrictAssertions.assertThat(result).isEqualTo("abfor");
 
     }
 
     @Test
     public void shouldPatternSplitWork() {
         String result = Pattern.compile(":").splitAsStream("one:two:two:three:two1").filter(s -> s.contains("two")).sorted().collect(joining(":"));
-        Assertions.assertThat(result).isEqualTo("two:two:two1");
+        StrictAssertions.assertThat(result).isEqualTo("two:two:two1");
 
     }
 
     @Test
     public void shouldPatternPoperlyUse() {
         Pattern pattern = compile(".*@gmail\\.com");
-        Assertions.assertThat(of("przodownik@gmail.com", "przodownikR1@tlen.pl").filter(pattern.asPredicate()).count()).isEqualTo(1);
+        StrictAssertions.assertThat(of("przodownik@gmail.com", "przodownikR1@tlen.pl").filter(pattern.asPredicate()).count()).isEqualTo(1);
     }
 
 }

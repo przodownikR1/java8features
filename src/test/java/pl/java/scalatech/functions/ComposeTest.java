@@ -2,7 +2,7 @@ package pl.java.scalatech.functions;
 
 import java.util.function.Function;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.StrictAssertions;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,14 +43,14 @@ public class ComposeTest {
     public void andThenTest() {
         Function<Integer, Integer> baseFunction = t -> t + 2;
         Function<Integer, Integer> afterFunction = baseFunction.andThen(t -> t * 3);
-        Assertions.assertThat(afterFunction.apply(5)).isEqualTo(21);
+        StrictAssertions.assertThat(afterFunction.apply(5)).isEqualTo(21);
     }
 
     @Test
     public void composeTest() {
         Function<Integer, Integer> baseFunction = t -> t + 2;
         Function<Integer, Integer> beforeFunction = baseFunction.compose(t -> t * 3);
-        Assertions.assertThat(beforeFunction.apply(5)).isEqualTo(17);
+        StrictAssertions.assertThat(beforeFunction.apply(5)).isEqualTo(17);
     }
 
 }

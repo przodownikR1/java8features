@@ -12,8 +12,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.attribute.BasicFileAttributes;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -23,6 +21,8 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class URLTest {
@@ -75,7 +75,7 @@ public class URLTest {
         String line = Files.readFirstLine(fileTemp, Charset.defaultCharset());
         assertThat(line).isEqualTo("<!DOCTYPE html>");
         BasicFileAttributes attr = java.nio.file.Files.readAttributes(fileTemp.toPath(), BasicFileAttributes.class);
-        long fileSize = attr.size();
+        attr.size();
         log.info("attr,  {}   ", attr.size());
 
     }

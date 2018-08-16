@@ -17,11 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class Person implements Comparator<Person>{
+public class Person implements Comparator<Person> {
 
     private String name;
     private String login;
     private BigDecimal salary;
+
     @Override
     public int compare(Person o1, Person o2) {
         return o1.getSalary().compareTo(o2.getSalary());

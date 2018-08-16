@@ -7,8 +7,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +16,8 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.io.Files;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class WordCountInFIle {
@@ -42,7 +42,7 @@ public class WordCountInFIle {
                 .split(Files.asCharSource(file, Charsets.UTF_8).read()));
         log.info("+++1 : {}", wordOccurrences);
 
-        Multiset<String> wordOccurrences2 = HashMultiset.create(Splitter.on(CharMatcher.WHITESPACE).trimResults().omitEmptyStrings()
+        Multiset<String> wordOccurrences2 = HashMultiset.create(Splitter.on(CharMatcher.breakingWhitespace()).trimResults().omitEmptyStrings()
                 .split(Files.asCharSource(file, Charsets.UTF_8).read()));
         log.info("+++2:  {}", wordOccurrences2);
     }

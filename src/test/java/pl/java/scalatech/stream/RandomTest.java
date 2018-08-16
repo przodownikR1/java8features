@@ -12,14 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 public class RandomTest {
 
     @Test
-    public void shouldRandomGenerateTest(){
-      log.info("{}",Stream.generate(Math::random).limit(100).collect(Collectors.toList()));
+    public void shouldRandomGenerateTest() {
+        log.info("{}", Stream.generate(Math::random).limit(100).collect(Collectors.toList()));
     }
 
     @Test
-    public void shouldRandomGenerateTest2(){
-      new Random().ints().limit(10).forEach(System.out::println);
+    public void shouldRandomGenerateTest2() {
+        new Random().ints().limit(10).forEach(System.out::println);
     }
 
-    
 }
